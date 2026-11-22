@@ -1,0 +1,213 @@
+<!doctype html>
+<!-- Antes e depois: a partir de fotos reais de piscinas limpas (fotos/antes-depois/originais),
+     cria a versão "antes" escurecendo/esverdeando só a água. Aberto no navegador mostra a prévia;
+     ferramentas/antes-depois.ps1 abre com ?exportar=1 e salva os arquivos .webp. -->
+<meta charset="utf-8">
+<style>
+body{margin:0;background:#111;color:#fff;font:14px system-ui}
+.par{display:inline-flex;gap:4px;margin:6px}
+.par canvas{width:240px;height:400px}
+</style>
+<body>
+<script>
+const W = 600, H = 1000;  // saída 3:5, o dobro do tamanho do card
+const fotos = [
+  {id:'1-verde',    efeito:'verde',    cx:.55, cy:.5,  yMin:0,   satMin:.03},
+  {id:'2-turva',    efeito:'turva',    cx:.5,  cy:.62, yMin:.47},
+  {id:'3-folhas',   efeito:'folhas',   cx:.42, cy:.5,  yMin:0,   satMin:.03},
+  {id:'4-algas',    efeito:'algas',    cx:.62, cy:.5,  yMin:.36},
+  {id:'5-barrenta', efeito:'barrenta', cx:.5,  cy:.5,  yMin:.45}
+];
+
+/* ---------- utilitários ---------- */
+function rng(seed){ return () => (seed = (seed * 16807) % 2147483647) / 2147483647; }
+function ruido(w, h, escala, seed){             // ruído suave (value noise com 3 oitavas), 0..1
+  const r = rng(seed), out = new Float32Array(w*h);
+  let amp = 1, tot = 0;
+  for (let o = 0; o < 3; o++, escala /= 2, amp /= 2) {
+    const gw = Math.ceil(w/escala)+2, gh = Math.ceil(h/escala)+2, g = new Float32Array(gw*gh).map(() => r());
+    for (let y = 0; y < h; y++) for (let x = 0; x < w; x++) {
+      const fx = x/escala, fy = y/escala, ix = fx|0, iy = fy|0, tx = fx-ix, ty = fy-iy;
+      const sx = tx*tx*(3-2*tx), sy = ty*ty*(3-2*ty);
+      const a = g[iy*gw+ix], b = g[iy*gw+ix+1], c = g[(iy+1)*gw+ix], d = g[(iy+1)*gw+ix+1];
+      out[y*w+x] += amp * (a + (b-a)*sx + (c-a)*sy + (a-b-c+d)*sx*sy);
+    }
+    tot += amp;
+  }
+  for (let i = 0; i < out.length; i++) out[i] /= tot;
+  return out;
+}
+function desfocar(ctxOrigem, raio){
+  const c = document.createElement('canvas'); c.width = W; c.height = H;
+  const g = c.getContext('2d'); g.filter = `blur(${raio}px)`; g.drawImage(ctxOrigem.canvas, 0, 0);
+  return g.getImageData(0, 0, W, H).data;
+}
+function hsv(r, g, b){
+  const mx = Math.max(r,g,b), mn = Math.min(r,g,b), d = mx-mn;
+  let h = 0;
+  if (d) h = mx === r ? ((g-b)/d) % 6 : mx === g ? (b-r)/d + 2 : (r-g)/d + 4;
+  return [(h*60+360)%360, mx ? d/mx : 0, mx/255];
+}
+/* máscara da água: tons azul/ciano, suavizada */
+function mascaraAgua(px, yMinPx, satMin = .12){
+  const m = new Float32Array(W*H);
+  for (let i = 0; i < W*H; i++) {
+    const y = (i / W) | 0;
+    if (y < yMinPx) continue;
+    const [h, s, v] = hsv(px[i*4], px[i*4+1], px[i*4+2]);
+    const matiz = Math.max(0, 1 - Math.abs(h - 188) / 36);      // 152..224 graus
+    const sat = Math.min(1, Math.max(0, (s - satMin) / .14));
+    const luz = Math.min(1, Math.max(0, (v - .12) / .15));
+    m[i] = Math.min(1, matiz * 1.6) * sat * luz;
+  }
+  // suaviza a máscara (borrão em caixa, 2 passadas)
+  const t = new Float32Array(W*H), R = 6;
+  for (let p = 0; p < 2; p++) {
+    for (let y = 0; y < H; y++) { let a = 0; for (let x = -R; x < W; x++) { if (x+R < W) a += m[y*W+x+R]; if (x-R-1 >= 0) a -= m[y*W+x-R-1]; if (x >= 0) t[y*W+x] = a/(2*R+1); } }
+    for (let x = 0; x < W; x++) { let a = 0; for (let y = -R; y < H; y++) { if (y+R < H) a += t[(y+R)*W+x]; if (y-R-1 >= 0) a -= t[(y-R-1)*W+x]; if (y >= 0) m[y*W+x] = a/(2*R+1); } }
+  }
+  for (let i = 0; i < m.length; i++) m[i] = Math.min(1, m[i] * 1.25);
+  return m;
+}
+const mix = (a, b, t) => a + (b - a) * t;
+
+/* ---------- efeitos (só onde há água) ---------- */
+const efeitos = {
+  verde(px, m, bl, n){
+    for (let i = 0; i < W*H; i++) {
+      const w = m[i]; if (!w) continue; const k = i*4;
+      const L = (.3*bl[k] + .59*bl[k+1] + .11*bl[k+2]) / 255;
+      const brilho = Math.max(0, (.3*px[k]+.59*px[k+1]+.11*px[k+2])/255 - .82) * 3;   // mantém reflexos
+      const mancha = .62 + .6 * n[i];
+      const alvo = [ (38 + 62*L) * mancha, (64 + 78*L) * mancha, (26 + 30*L) * mancha ];
+      for (let c = 0; c < 3; c++) {
+        const base = mix(px[k+c], bl[k+c], .55);              // perde transparência
+        px[k+c] = mix(px[k+c], mix(mix(base, alvo[c], .82), px[k+c], brilho), w * .97);
+      }
+    }
+  },
+  turva(px, m, bl, n){
+    for (let i = 0; i < W*H; i++) {
+      const w = m[i]; if (!w) continue; const k = i*4;
+      const L = (.3*bl[k] + .59*bl[k+1] + .11*bl[k+2]) / 255;
+      const veu = .9 + .2 * n[i];
+      const alvo = [ (118 + 70*L) * veu, (150 + 62*L) * veu, (140 + 52*L) * veu ];
+      for (let c = 0; c < 3; c++) {
+        const base = mix(px[k+c], bl[k+c], .7);
+        px[k+c] = mix(px[k+c], mix(base, alvo[c], .62), w * .95);
+      }
+    }
+  },
+  folhas(px, m, bl, n){
+    for (let i = 0; i < W*H; i++) {
+      const w = m[i]; if (!w) continue; const k = i*4;
+      const g = (px[k] + px[k+1] + px[k+2]) / 3, suj = .75 + .35 * n[i];
+      px[k]   = mix(px[k],   mix(g, px[k], .55) * .9 * suj + 18, w * .7);
+      px[k+1] = mix(px[k+1], mix(g, px[k+1], .55) * .93 * suj + 10, w * .7);
+      px[k+2] = mix(px[k+2], mix(g, px[k+2], .55) * .8 * suj, w * .7);
+    }
+  },
+  algas(px, m, bl, n, n2){
+    for (let i = 0; i < W*H; i++) {
+      const w = m[i]; if (!w) continue; const k = i*4;
+      const placa = Math.min(1, Math.max(0, (n2[i] - .45) / .2));  // manchas de alga no fundo
+      const t = w * (.25 + .65 * placa);
+      const L = (.3*px[k] + .59*px[k+1] + .11*px[k+2]) / 255;
+      const alvo = [ 40 + 70*L, 70 + 80*L, 34 + 30*L ];
+      for (let c = 0; c < 3; c++) px[k+c] = mix(px[k+c], alvo[c] * (.85 + .3*n[i]), t);
+    }
+  },
+  barrenta(px, m, bl, n){
+    for (let i = 0; i < W*H; i++) {
+      const w = m[i]; if (!w) continue; const k = i*4;
+      const L = (.3*bl[k] + .59*bl[k+1] + .11*bl[k+2]) / 255;
+      const brilho = Math.max(0, (.3*px[k]+.59*px[k+1]+.11*px[k+2])/255 - .85) * 3;
+      const v = .88 + .24 * n[i];
+      const alvo = [ (112 + 70*L) * v, (92 + 58*L) * v, (58 + 34*L) * v ];
+      for (let c = 0; c < 3; c++) {
+        const base = mix(px[k+c], bl[k+c], .75);
+        px[k+c] = mix(px[k+c], mix(mix(base, alvo[c], .85), px[k+c], brilho), w * .97);
+      }
+    }
+  }
+};
+
+/* folhas boiando: só onde há água, com sombra suave */
+function desenharFolhas(g, m, seed, qtd){
+  // folhas secas largas, em tons de marrom/oliva apagados (nada de laranja vivo)
+  const r = rng(seed), cores = [['#5e4a2c','#7d6640'],['#6a6236','#8a8048'],['#4f3f25','#6e5a37'],['#73663f','#948656'],['#584c30','#7a6b45']];
+  let feitas = 0, tent = 0;
+  while (feitas < qtd && tent++ < 6000) {
+    const x = 30 + r()*(W-60), y = 30 + r()*(H-60);
+    if (m[(y|0)*W + (x|0)] < .97) continue;
+    const tam = 22 + r()*22, larg = .5 + r()*.18, ang = r()*Math.PI*2, [c1, c2] = cores[(r()*cores.length)|0];
+    const curva = (r() - .5) * .5;           // folha levemente torta
+    const forma = () => {
+      g.beginPath();
+      g.moveTo(-tam, 0);
+      g.bezierCurveTo(-tam*.55, -tam*larg*1.1, tam*.45, -tam*larg*(.9+curva), tam, curva*tam*.2);
+      g.bezierCurveTo(tam*.45, tam*larg*(.9-curva), -tam*.55, tam*larg*1.1, -tam, 0);
+    };
+    g.save(); g.translate(x + 6, y + 8); g.rotate(ang); forma();
+    g.filter = 'blur(5px)'; g.fillStyle = 'rgba(0,25,35,.22)'; g.fill(); g.restore();
+    g.save(); g.translate(x, y); g.rotate(ang); forma();
+    const gr = g.createLinearGradient(-tam, -tam*larg, tam, tam*larg); gr.addColorStop(0, c1); gr.addColorStop(1, c2);
+    g.fillStyle = gr; g.globalAlpha = .9; g.fill();
+    g.globalAlpha = .35; g.strokeStyle = '#2e2312'; g.lineWidth = 1.2;
+    g.beginPath(); g.moveTo(-tam*1.25, 0); g.quadraticCurveTo(0, curva*tam*.15, tam*.92, curva*tam*.18); g.stroke();
+    g.restore();
+    feitas++;
+  }
+  // pontinhos de sujeira
+  g.fillStyle = 'rgba(60,45,25,.5)';
+  for (let i = 0, t = 0; i < 160 && t < 20000; t++) {
+    const x = r()*W, y = r()*H;
+    if (m[(y|0)*W + (x|0)] < .95) continue;
+    g.beginPath(); g.arc(x, y, .8 + r()*1.6, 0, Math.PI*2); g.fill(); i++;
+  }
+}
+
+/* ---------- processamento ---------- */
+function recortar(img, f){
+  const c = document.createElement('canvas'); c.width = W; c.height = H;
+  const g = c.getContext('2d');
+  const s = Math.max(W / img.naturalWidth, H / img.naturalHeight);
+  const w = img.naturalWidth * s, h = img.naturalHeight * s;
+  const x = Math.min(0, Math.max(W - w, W/2 - w*f.cx)), y = Math.min(0, Math.max(H - h, H/2 - h*f.cy));
+  g.imageSmoothingQuality = 'high';
+  g.drawImage(img, x, y, w, h);
+  return {g, yMinPx: Math.max(0, f.yMin * h + y)};
+}
+function processar(img, f, i){
+  const depois = recortar(img, f), antes = recortar(img, f);
+  const id = antes.g.getImageData(0, 0, W, H), px = id.data;
+  const m = mascaraAgua(px, antes.yMinPx, f.satMin);
+  const bl = desfocar(antes.g, f.efeito === 'turva' || f.efeito === 'barrenta' ? 9 : 6);
+  const n = ruido(W, H, 220, 11 + i*7), n2 = ruido(W, H, 90, 99 + i*13);
+  efeitos[f.efeito](px, m, bl, n, n2);
+  antes.g.putImageData(id, 0, 0);
+  if (f.efeito === 'folhas') desenharFolhas(antes.g, m, 7, 14);
+  if (f.efeito === 'verde') desenharFolhas(antes.g, m, 5, 4);
+  return {antes: antes.g.canvas, depois: depois.g.canvas};
+}
+
+const exportar = new URLSearchParams(location.search).has('exportar');
+const imgs = fotos.map(f => { const im = new Image(); im.src = '../fotos/antes-depois/originais/' + f.id + '.jpg'; return im; });
+addEventListener('load', () => {
+  fotos.forEach((f, i) => {
+    const r = processar(imgs[i], f, i);
+    if (exportar) {
+      for (const lado of ['antes', 'depois']) {
+        const pre = document.createElement('pre');
+        pre.dataset.nome = f.id + '-' + lado;
+        pre.textContent = r[lado].toDataURL('image/webp', .82);
+        document.body.appendChild(pre);
+      }
+    } else {
+      const d = document.createElement('div'); d.className = 'par';
+      d.append(r.antes, r.depois); document.body.appendChild(d);
+    }
+  });
+  document.body.dataset.pronto = '1';
+});
+</script>

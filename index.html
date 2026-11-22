@@ -75,7 +75,7 @@ svg{display:block}
 .cartao{--p:50%;position:relative;flex:0 0 clamp(230px,21vw,270px);aspect-ratio:3/5;border-radius:16px;
   overflow:hidden;scroll-snap-align:start;background:#123;text-align:left;user-select:none}
 .cartao .img{position:absolute;inset:0}
-.cartao .img svg{width:100%;height:100%}
+.cartao .img svg,.cartao .img img{display:block;width:100%;height:100%;object-fit:cover}
 .cartao .antes{clip-path:inset(0 calc(100% - var(--p)) 0 0)}
 .cartao .divisor{position:absolute;top:0;bottom:0;left:var(--p);width:3px;margin-left:-1.5px;background:#fff;pointer-events:none}
 .cartao .divisor::after{content:"‹ ›";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
@@ -629,27 +629,24 @@ const celular=matchMedia('(max-width:820px)');
   }, celular.matches ? 2500 : 3000);
 })();
 
-/* Antes e depois.
-   Para usar fotos reais, adicione  antesFoto:'fotos/1-antes.jpg', depoisFoto:'fotos/1-depois.jpg'  em cada item. */
+/* Antes e depois: fotos em fotos/antes-depois (geradas por ferramentas/antes-depois.ps1).
+   Para usar fotos de clientes, troque  foto:'1-verde'  pelo nome dos arquivos  X-antes.webp / X-depois.webp. */
 const trabalhos = [
-  {nome:'Piscina 01', obs:'Água verde → cristalina',      agua:['#6F8F3E','#3E5F2A'], mancha:'#2F4A1E', piso:'#D9CDB8'},
-  {nome:'Piscina 02', obs:'Água turva → transparente',    agua:['#9DB3A6','#6F8F86'], mancha:'#5E7A70', piso:'#C9A27A', folhas:2},
-  {nome:'Piscina 03', obs:'Folhas e sujeira removidas',   agua:['#5FA89A','#2F7F7A'], mancha:'#2C6A5E', piso:'#E3DCD0'},
-  {nome:'Piscina 04', obs:'Algas no fundo → fundo limpo', agua:['#4F7A3A','#2C4A22'], mancha:'#1E3516', piso:'#BFB6A6', folhas:3},
-  {nome:'Piscina 05', obs:'Água barrenta → azul',         agua:['#A08A55','#6F5E38'], mancha:'#5A4A28', piso:'#D6C7AE', folhas:4}
+  {foto:'1-verde',    obs:'Água verde → cristalina'},
+  {foto:'2-turva',    obs:'Água turva → transparente'},
+  {foto:'3-folhas',   obs:'Folhas e sujeira removidas'},
+  {foto:'4-algas',    obs:'Algas no fundo → fundo limpo'},
+  {foto:'5-barrenta', obs:'Água barrenta → azul'}
 ];
 const trilho=document.getElementById('trilho');
 trabalhos.forEach((t,i)=>{
-  const sol=.25+(i%3)*.25;
-  const foto=src=>`<img src="${src}" alt="" style="width:100%;height:100%;object-fit:cover">`;
-  const antes = t.antesFoto ? foto(t.antesFoto) : cena({...t,ceu:CEU_RUIM,sujo:true,sol,planta:'#5C7F4C'});
-  const depois= t.depoisFoto? foto(t.depoisFoto): cena({ceu:CEU_OK,agua:LIMPA,piso:t.piso,sol});
+  const foto=(lado,alt)=>`<img src="fotos/antes-depois/${t.foto}-${lado}.webp" alt="${alt}" loading="${i<3?'eager':'lazy'}" draggable="false">`;
   const c=document.createElement('article');
   c.className='cartao';
-  c.innerHTML=`<div class="img">${depois}</div><div class="img antes">${antes}</div>
+  c.innerHTML=`<div class="img">${foto('depois','Piscina depois da limpeza')}</div><div class="img antes">${foto('antes','Piscina antes da limpeza')}</div>
     <div class="divisor"></div><span class="etq a">Antes</span><span class="etq d">Depois</span>
-    <div class="legenda"><strong>${t.nome}</strong><small>${t.obs}</small></div>
-    <input type="range" min="0" max="100" value="50" aria-label="Comparar antes e depois — ${t.nome}">`;
+    <div class="legenda"><small>${t.obs}</small></div>
+    <input type="range" min="0" max="100" value="50" aria-label="Comparar antes e depois: ${t.obs}">`;
   c.querySelector('input').addEventListener('input',e=>c.style.setProperty('--p',e.target.value+'%'));
   trilho.appendChild(c);
 });
