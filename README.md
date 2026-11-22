@@ -1,24 +1,22 @@
 # O Piscineiro
 
-Site de apresentação do O Piscineiro — limpeza e manutenção de piscinas em Barra Velha, SC. *Garantindo o seu lazer.*
+Site do O Piscineiro, limpeza e manutenção de piscinas em Barra Velha, SC.
 
-Página estática: tudo fica em `index.html` (HTML, CSS e JS), com as fotos em `fotos/`, o logo em `logo.svg` e o ícone da aba em `icone.svg`.
+**Site no ar:** https://opiscineiro.pages.dev/
 
-## Ver no computador
+Hospedado no Cloudflare Pages. Cada commit na branch `main` atualiza o site automaticamente.
 
-Abra `index.html` no navegador, ou rode o servidor local (Windows PowerShell):
+## Estrutura
+
+- `index.html`: a página inteira (HTML, CSS e JS)
+- `fotos/`: fotos usadas no site
+- `marca/`: logo, foto de perfil e capa para as redes sociais
+- `ferramentas/`: scripts usados para gerar as imagens e rodar o site no computador
+
+## Rodar no computador
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\ferramentas\serve.ps1
 ```
 
-e acesse http://localhost:8765.
-
-## Scripts de apoio (`ferramentas/`)
-
-- `serve.ps1` — servidor local simples.
-- `mapa.ps1` — gera o mapa de Santa Catarina a partir das malhas do IBGE.
-- `fotos.ps1` — baixa as fotos originais em JPG (Unsplash/Pexels, licença livre).
-- `antes-depois.ps1` — gera as fotos da seção "Antes e depois" (`fotos/antes-depois/`) a partir de fotos reais de piscinas limpas (Pexels, licença livre); a versão "antes" é uma edição feita só na água (`render-antes-depois.html`).
-- `trabalhos.ps1` — gera as fotos da seção "Trabalhos realizados" (`fotos/trabalhos/`) a partir das fotos reais em `fotos/trabalhos/originais`; o enquadramento e os ajustes de cor de cada foto ficam em `render-trabalhos.html`.
-- `imagens.ps1` — com o servidor local ligado, usa o Edge sem janela para gerar `icone-180.png` (ícone do iPhone), `fotos/compartilhar.jpg` (prévia do link) e as fotos em WebP usadas no site, a partir dos moldes `render-*.html`.
+Depois é só abrir http://localhost:8765.
