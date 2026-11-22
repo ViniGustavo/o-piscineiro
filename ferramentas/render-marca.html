@@ -1,0 +1,56 @@
+<!doctype html>
+<!-- Molde dos arquivos da marca (pasta "marca"). Gerado por ferramentas/marca.ps1
+     ?v=emblema  -> só o emblema, igual ao do site
+     ?v=nome     -> emblema com "O PISCINEIRO" em volta, como a logo antiga
+     &fundo=1    -> fundo azul quadrado (foto de perfil das redes) -->
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600&family=Poppins:ital,wght@1,800&display=block" rel="stylesheet">
+<style>
+html,body{margin:0;width:100vw;height:100vh;overflow:hidden;background:transparent}
+body.fundo{background:#0B3C5D}
+svg{display:block;width:100vw;height:100vh}
+</style>
+<body>
+<svg id="marca" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- topo: lido da esquerda para a direita, por cima -->
+    <path id="arco-topo" d="M 34 150 A 116 116 0 0 1 266 150"/>
+    <!-- base: lido da esquerda para a direita, por baixo -->
+    <path id="arco-base" d="M 21 150 A 129 129 0 0 0 279 150"/>
+  </defs>
+  <circle id="disco" cx="150" cy="150" r="120" fill="#0B3C5D"/>
+  <g stroke="#F5A532" stroke-width="7" stroke-linecap="round">
+    <line x1="150" y1="92" x2="150" y2="78"/>
+    <line x1="180.4" y1="104.6" x2="190.3" y2="94.7"/>
+    <line x1="193" y1="135" x2="207" y2="135"/>
+    <line x1="119.6" y1="104.6" x2="109.7" y2="94.7"/>
+    <line x1="107" y1="135" x2="93" y2="135"/>
+  </g>
+  <circle cx="150" cy="135" r="32" fill="#F5A532"/>
+  <path d="M80 166 q17.5 -12 35 0 t35 0 t35 0 t35 0 V232 H80 Z" fill="#0B3C5D"/>
+  <path d="M84 168 q16.5 -12 33 0 t33 0 t33 0 t33 0" fill="none" stroke="#19B5D6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M100 192 q16.7 -11 33.3 0 t33.3 0 t33.3 0" fill="none" stroke="#19B5D6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+  <circle cx="150" cy="150" r="102" fill="none" stroke="#F5A532" stroke-width="3"/>
+  <g id="texto">
+    <text font-family="Poppins" font-style="italic" font-weight="800" font-size="25" letter-spacing="3.2" fill="#F5A532">
+      <textPath href="#arco-topo" startOffset="50%" text-anchor="middle"><tspan fill="#FFFFFF">O</tspan> PISCINEIRO</textPath>
+    </text>
+    <text font-family="Outfit" font-weight="600" font-size="14.5" letter-spacing="4.2" fill="#FFFFFF">
+      <textPath href="#arco-base" startOffset="50%" text-anchor="middle">GARANTINDO O SEU LAZER</textPath>
+    </text>
+    <circle cx="25" cy="150" r="3.6" fill="#F5A532"/>
+    <circle cx="275" cy="150" r="3.6" fill="#F5A532"/>
+  </g>
+</svg>
+<script>
+const q = new URLSearchParams(location.search);
+const svg = document.getElementById('marca');
+if (q.get('v') === 'nome') {
+  document.getElementById('disco').setAttribute('r', '146');
+  svg.setAttribute('viewBox', q.get('fundo') ? '-22 -22 344 344' : '2 2 296 296');
+} else {
+  document.getElementById('texto').remove();
+  svg.setAttribute('viewBox', q.get('fundo') ? '0 0 300 300' : '29 29 242 242');
+}
+if (q.get('fundo')) document.body.classList.add('fundo');
+</script>
