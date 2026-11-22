@@ -14,14 +14,23 @@ $itens = @(
   @('logo-com-nome.png',         '?v=nome',            2000)
 )
 Add-Type -AssemblyName System.Drawing
-foreach ($i in $itens) {
-  $saida = Join-Path $dir $i[0]
+function Gerar($nome, $url, $w, $h) {
+  $saida = Join-Path $dir $nome
   if (Test-Path $saida) { Remove-Item $saida }
-  $px = $i[2]
   & $edge --headless=new --disable-gpu --hide-scrollbars --no-first-run "--user-data-dir=$perfil" `
-    '--default-background-color=00000000' "--window-size=$px,$px" '--virtual-time-budget=8000' `
-    "--screenshot=$saida" ($base + $i[1]) 2>$null | Out-Null
+    '--default-background-color=00000000' "--window-size=$w,$h" '--virtual-time-budget=8000' `
+    "--screenshot=$saida" $url 2>$null | Out-Null
   $img = [Drawing.Image]::FromFile($saida)
-  '{0}  {1}x{2}  {3:N0} KB' -f $i[0], $img.Width, $img.Height, ((Get-Item $saida).Length / 1KB)
+  '{0}  {1}x{2}  {3:N0} KB' -f $nome, $img.Width, $img.Height, ((Get-Item $saida).Length / 1KB)
   $img.Dispose()
 }
+foreach ($i in $itens) { Gerar $i[0] ($base + $i[1]) $i[2] $i[2] }
+
+# Capa do Facebook (usa o logo-emblema.png gerado acima)
+Gerar 'capa-facebook.png' 'http://localhost:8765/ferramentas/render-banner.html' 1640 624
+
+# Pacote .zip com todas as imagens
+$zip = Join-Path $dir 'o-piscineiro-marca.zip'
+if (Test-Path $zip) { Remove-Item $zip }
+Compress-Archive -Path (Join-Path $dir '*.png') -DestinationPath $zip
+'o-piscineiro-marca.zip  {0:N0} KB' -f ((Get-Item $zip).Length / 1KB)
