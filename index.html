@@ -60,37 +60,6 @@ svg{display:block}
 .pontos i{width:34px;height:4px;border-radius:2px;background:rgba(255,255,255,.3);transition:background .6s}
 .pontos i.on{background:var(--sun)}
 
-/* ---------- 2. Antes e depois ---------- */
-.antes-depois{background:var(--navy-d);padding:70px 0 80px;color:#fff;text-align:center}
-.antes-depois h2{font-weight:800;font-size:clamp(1.6rem,3.4vw,2.5rem);line-height:1.05;letter-spacing:.06em;text-transform:uppercase}
-.antes-depois h2 em{font-style:normal;color:var(--sun)}
-.antes-depois .sub{margin:14px auto 44px;max-width:420px;padding:0 20px;color:rgba(255,255,255,.65);font-weight:300;font-size:.88rem}
-.carrossel{position:relative;max-width:1560px;margin:0 auto;padding:0 64px}
-.trilho{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:4px}
-.trilho::-webkit-scrollbar{display:none}
-.seta{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:0;
-  background:transparent;color:#fff;font-size:2rem;line-height:1;cursor:pointer;transition:background .2s,color .2s}
-.seta:hover{background:var(--sun);color:var(--navy-d)}
-.seta.esq{left:10px}.seta.dir{right:10px}
-.cartao{--p:50%;position:relative;flex:0 0 clamp(230px,21vw,270px);aspect-ratio:3/5;border-radius:16px;
-  overflow:hidden;scroll-snap-align:start;background:#123;text-align:left;user-select:none}
-.cartao .img{position:absolute;inset:0}
-.cartao .img svg,.cartao .img img{display:block;width:100%;height:100%;object-fit:cover}
-.cartao .antes{clip-path:inset(0 calc(100% - var(--p)) 0 0)}
-.cartao .divisor{position:absolute;top:0;bottom:0;left:var(--p);width:3px;margin-left:-1.5px;background:#fff;pointer-events:none}
-.cartao .divisor::after{content:"‹ ›";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
-  width:40px;height:40px;border-radius:50%;background:var(--sun);color:var(--navy-d);font-weight:700;
-  display:grid;place-items:center;font-size:1.05rem;box-shadow:0 2px 10px rgba(0,0,0,.35)}
-.cartao input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0;z-index:3}
-.etq{position:absolute;top:12px;padding:4px 10px;border-radius:99px;font-size:.72rem;font-weight:600;
-  letter-spacing:.12em;text-transform:uppercase;pointer-events:none;z-index:2}
-.etq.a{left:12px;background:rgba(7,42,66,.75);color:#fff}
-.etq.d{right:12px;background:var(--sun);color:var(--navy-d)}
-.legenda{position:absolute;inset:auto 0 0 0;padding:60px 16px 18px;text-align:center;pointer-events:none;z-index:2;
-  background:linear-gradient(transparent,rgba(7,42,66,.9))}
-.legenda strong{display:block;font-size:1.1rem;font-weight:700}
-.legenda small{font-size:.9rem;color:rgba(255,255,255,.85);font-weight:300}
-
 /* ---------- 3. Serviços ---------- */
 .servico{display:grid;grid-template-columns:1fr 1fr;min-height:470px}
 .servico .arte{overflow:hidden;min-height:320px}
@@ -138,7 +107,6 @@ footer .fim{margin-top:40px;font-size:.8rem;color:rgba(255,255,255,.45)}
 .servico:not(.inv) h2::after{margin-left:auto}
 .servico:not(.inv) li{background:var(--sun);border-color:var(--sun);color:var(--navy-d)}
 .servico.inv li{border-color:var(--sun);color:var(--sun)}
-.seta{border:1.5px solid var(--sun);color:var(--sun)}
 footer{border-top:5px solid var(--sun)}
 .desce{position:absolute;z-index:2;right:clamp(20px,7vw,120px);bottom:clamp(60px,11vh,130px);color:var(--sun);
   font-size:.8rem;letter-spacing:.25em;text-transform:uppercase;text-decoration:none;writing-mode:vertical-rl;
@@ -203,15 +171,6 @@ footer .lema{font-size:.9rem;margin-top:2px}
 footer .fim{margin-top:16px;font-size:.75rem}
 @media (max-width:820px){.local{grid-template-columns:1fr;padding:40px 24px}.local .mapa{width:100%}}
 @media (prefers-reduced-motion:reduce){.pulso{animation:none;opacity:0}}
-
-/* Carrossel: 3 cartões visíveis por vez */
-.carrossel{--cw:clamp(230px,21vw,270px);max-width:calc(3 * var(--cw) + 40px + 8px + 128px)}
-.cartao{flex-basis:var(--cw)}
-.trilho{scroll-padding-left:4px}
-.seta,.seta:hover{border:0;background:none;color:var(--sun)}
-.seta{font-size:2.6rem;transition:transform .2s}
-.seta:hover{transform:translateY(-50%) scale(1.25)}
-@media (max-width:820px){.carrossel{max-width:none}.cartao{flex-basis:72vw}}
 
 /* Nome da marca em negrito itálico sem serifa */
 .hero h1,.hero h1 em,.marca span,.marca span b{font-family:'Poppins',Arial,sans-serif;font-style:italic;font-weight:800}
@@ -297,13 +256,12 @@ footer .nome b{color:#fff}
 @media (prefers-reduced-motion:reduce){.marca span::after{animation:none;transition:none}}
 
 /* Todos os títulos de seção na fonte da marca */
-.antes-depois h2,.antes-depois h2 em,.servico h2{font-family:'Poppins',Arial,sans-serif;font-style:italic;font-weight:800}
-.antes-depois h2{text-transform:none;letter-spacing:0;font-size:clamp(1.5rem,2.6vw,2.1rem)}
+.servico h2{font-family:'Poppins',Arial,sans-serif;font-style:italic;font-weight:800}
 .servico h2{font-size:clamp(1.5rem,2.4vw,2rem);margin-top:0}
 
 /* Cantos retos em todo o site (pontos e marcadores redondos continuam redondos) */
-.cartao,.etq,.selo,.servico li,.local .mapa svg,.pontos i,.servico h2::after,.redes a,
-.cartao .divisor::after,.menu-btn span{border-radius:0}
+.selo,.servico li,.local .mapa svg,.pontos i,.servico h2::after,.redes a,
+.menu-btn span{border-radius:0}
 
 /* Ajustes da revisão no celular */
 @media (max-width:820px){
@@ -314,11 +272,6 @@ footer .nome b{color:#fff}
   /* Menu aberto mais compacto */
   .topo .menu{padding:0 20px 6px}
   .topo .menu a{padding:10px 0;font-size:11px}
-  /* Setas do carrossel no celular: fundo escuro translúcido, acima da linha do controle de arrastar */
-  .carrossel .seta,.carrossel .seta:hover{display:grid;place-items:center;top:50%;transform:translateY(-50%);
-    width:34px;height:50px;padding:0;z-index:5;border-radius:0;background:rgba(0,0,0,.42);color:#fff;font-size:1.5rem;line-height:1}
-  .carrossel .seta.esq{left:16px}
-  .carrossel .seta.dir{right:16px}
 }
 
 /* Entrada suave da abertura */
@@ -359,19 +312,19 @@ section{scroll-margin-top:62px}
   .servico.inv .arte{order:0}
   .servico .txt,.servico:not(.inv) .txt{text-align:left;align-items:flex-start;padding:44px 24px}
   .servico:not(.inv) ul{justify-content:flex-start}
-  .carrossel{padding:0 16px}
-  .seta{display:none}
-  .cartao{flex-basis:72vw}
   .topo span{font-size:.9rem;letter-spacing:.2em}
 }
 /* ---------- Trabalhos realizados ---------- */
-.trabalhos{background:var(--foam);padding:72px max(24px,calc((100% - 1120px)/2)) 80px}
-.trab-topo h2{font-family:'Poppins',Arial,sans-serif;font-style:italic;font-weight:800;color:var(--navy);
-  font-size:clamp(1.5rem,2.4vw,2rem);line-height:1.1;margin-top:10px}
+.trabalhos{background:var(--navy-d);color:#fff;text-align:center;padding:70px max(24px,calc((100% - 1040px)/2)) 76px}
+.trab-topo h2{font-family:'Poppins',Arial,sans-serif;font-style:italic;font-weight:800;color:#fff;
+  font-size:clamp(1.5rem,2.6vw,2.1rem);line-height:1.1}
 .trab-topo h2 em{font-style:italic;color:var(--sun)}
-.trab-topo p{margin-top:10px;max-width:520px;font-weight:300;line-height:1.55}
-.galeria{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
-.obra{position:relative;margin:0;aspect-ratio:4/5;overflow:hidden;background:#123;box-shadow:0 10px 28px rgba(7,42,66,.16)}
+.trab-topo p{margin:14px auto 0;max-width:440px;color:rgba(255,255,255,.7);font-weight:300;font-size:.92rem;line-height:1.55}
+.galeria{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:40px;text-align:left}
+.obra{position:relative;margin:0;aspect-ratio:4/5;overflow:hidden;background:#123;box-shadow:0 12px 30px rgba(0,0,0,.35)}
+.trab-cta{margin-top:44px}
+.trab-cta p{font-size:1.15rem;font-weight:500}
+.trab-cta .zap{margin-top:16px}
 .obra img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;
   transition:transform .9s cubic-bezier(.2,.7,.2,1),opacity .7s ease}
 .obra:hover img{transform:scale(1.04)}
@@ -442,9 +395,8 @@ section{scroll-margin-top:62px}
   </a>
   <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
   <nav class="menu" id="menu">
-    <a href="#antes-depois">Antes e depois</a>
+    <a href="#resultados">Resultados</a>
     <a href="#ph">Serviços</a>
-    <a href="#trabalhos">Trabalhos</a>
     <a href="#onde">Onde atendemos</a>
     <a href="#duvidas">Dúvidas</a>
   </nav>
@@ -460,7 +412,7 @@ section{scroll-margin-top:62px}
   <h1><em>O</em> Piscineiro</h1>
   <p>“Garantindo o seu lazer”</p>
   <div class="pontos"><i class="on"></i><i></i><i></i></div>
-  <a class="desce" href="#antes-depois">Role para ver</a>
+  <a class="desce" href="#resultados">Role para ver</a>
 </section>
 
 <div class="faixa" aria-hidden="true"><div>
@@ -469,15 +421,17 @@ section{scroll-margin-top:62px}
 </div></div>
 <button class="subir" id="subir" aria-label="Voltar ao topo">↑</button>
 
-<!-- ============ 2. ANTES E DEPOIS ============ -->
-<section class="antes-depois" id="antes-depois">
-  <h2 class="surge">Antes <em>e</em> depois</h2>
-  <svg class="onda" viewBox="0 0 150 18" aria-hidden="true"><path d="M4 12q11.8-10 23.6 0t23.6 0t23.6 0t23.6 0t23.6 0t23.6 0" fill="none" stroke="#F5A532" stroke-width="5" stroke-linecap="round"/></svg>
-  <p class="sub surge">Arraste o controle de cada piscina para comparar como ela estava e como ficou.</p>
-  <div class="carrossel">
-    <button class="seta esq" aria-label="Anterior">‹</button>
-    <div class="trilho" id="trilho"></div>
-    <button class="seta dir" aria-label="Próximo">›</button>
+<!-- ============ 2. RESULTADOS (fotos reais; a lista fica no script, em "realizados") ============ -->
+<section class="trabalhos" id="resultados">
+  <div class="trab-topo surge">
+    <h2>Resultados <em>reais</em></h2>
+    <svg class="onda" viewBox="0 0 150 18" aria-hidden="true"><path d="M4 12q11.8-10 23.6 0t23.6 0t23.6 0t23.6 0t23.6 0t23.6 0" fill="none" stroke="#F5A532" stroke-width="5" stroke-linecap="round"/></svg>
+    <p>Piscinas atendidas pelo O Piscineiro, sem montagem. Toque nos cartões para comparar o antes e o depois.</p>
+  </div>
+  <div class="galeria" id="galeria"></div>
+  <div class="trab-cta surge">
+    <p>Sua piscina também pode ficar assim.</p>
+    <a class="zap" data-zap href="#" target="_blank" rel="noopener"><span class="zap-ico"><svg><use href="#zap"/></svg></span><span class="zap-txt">Pedir orçamento</span><span class="zap-seta" aria-hidden="true">→</span></a>
   </div>
 </section>
 
@@ -513,16 +467,6 @@ section{scroll-margin-top:62px}
     <p>Peneiramos a superfície, escovamos paredes e bordas, aspiramos o fundo e cuidamos do filtro. Você só precisa se preocupar em aproveitar.</p>
     <ul><li>Peneiração</li><li>Escovação</li><li>Aspiração</li><li>Limpeza do filtro</li></ul>
   </div>
-</section>
-
-<!-- ============ TRABALHOS REALIZADOS (fotos reais; a lista fica no script, em "realizados") ============ -->
-<section class="trabalhos" id="trabalhos">
-  <div class="trab-topo surge">
-    <span class="rotulo">Portfólio</span>
-    <h2>Trabalhos <em>realizados</em></h2>
-    <p>Fotos reais de piscinas que cuidamos. Nos cartões com antes e depois, toque na foto para ver como a água estava.</p>
-  </div>
-  <div class="galeria" id="galeria"></div>
 </section>
 
 <!-- ============ ONDE ATENDEMOS ============ -->
@@ -571,7 +515,7 @@ section{scroll-margin-top:62px}
   </details>
   <details>
     <summary>Vocês recuperam piscina verde ou parada há muito tempo?</summary>
-    <p>Sim. Veja exemplos reais na seção <a href="#trabalhos">Trabalhos realizados</a>. O tempo de recuperação depende do estado da água; mande uma foto pelo <a data-zap href="#" target="_blank" rel="noopener">WhatsApp</a> para avaliarmos.</p>
+    <p>Sim. Veja exemplos na seção <a href="#resultados">Resultados reais</a>. O tempo de recuperação depende do estado da água; mande uma foto pelo <a data-zap href="#" target="_blank" rel="noopener">WhatsApp</a> para avaliarmos.</p>
   </details>
   <details>
     <summary>Preciso estar em casa na hora da visita?</summary>
@@ -608,56 +552,6 @@ section{scroll-margin-top:62px}
 </footer>
 
 <script>
-/* ---------- Ilustração de piscina (substituível por fotos reais) ---------- */
-let uid = 0;
-function cena(o){
-  const W=o.w||400, H=o.h||667, id=++uid, hz=H*.4, k=W/400;
-  const x1=W*.16, x2=W*.84, x3=W*.99, x4=W*.01, y1=H*.56, y2=H*.98;
-  const pts=[[.3,.66],[.56,.72],[.22,.83],[.62,.88],[.44,.61],[.4,.93]];
-  let agua='';
-  pts.slice(0,o.sujo?2:6).forEach(([fx,fy])=>{
-    agua+=`<path d="M${W*fx} ${H*fy}q${12*k} ${-8*k} ${24*k} 0t${24*k} 0t${24*k} 0" fill="none" stroke="#fff" stroke-width="${3*k}" stroke-linecap="round" opacity="${o.sujo?.18:.6}"/>`;
-  });
-  if(o.sujo){
-    [[.34,.7,60,16],[.6,.8,80,20],[.25,.9,70,16],[.66,.64,44,11],[.5,.92,90,14]].forEach(([fx,fy,rx,ry])=>{
-      agua+=`<ellipse cx="${W*fx}" cy="${H*fy}" rx="${rx*k}" ry="${ry*k}" fill="${o.mancha}" opacity=".55"/>`;
-    });
-    [[.3,.64,20,'#8a6a2b'],[.52,.7,-30,'#5d7a2a'],[.7,.86,50,'#8a6a2b'],[.2,.86,-10,'#6b5a22'],[.45,.84,70,'#5d7a2a'],[.62,.6,10,'#8a6a2b']]
-      .slice(0,o.folhas??6).forEach(([fx,fy,r,c])=>{
-      agua+=`<path d="M0 0q${7*k} ${-9*k} ${18*k} 0q${-11*k} ${9*k} ${-18*k} 0z" fill="${c}" transform="translate(${W*fx} ${H*fy}) rotate(${r})"/>`;
-    });
-  }
-  const vara=o.vara?`<line x1="${W*.97}" y1="${H*.1}" x2="${W*.63}" y2="${H*.69}" stroke="#E8ECEF" stroke-width="${5*k}" stroke-linecap="round"/>
-    <ellipse cx="${W*.6}" cy="${H*.71}" rx="${30*k}" ry="${13*k}" fill="rgba(255,255,255,.3)" stroke="#0B3C5D" stroke-width="${4*k}"/>`:'';
-  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="c${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${o.ceu[0]}"/><stop offset="1" stop-color="${o.ceu[1]}"/></linearGradient>
-    <linearGradient id="a${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${o.agua[0]}"/><stop offset="1" stop-color="${o.agua[1]}"/></linearGradient>
-  </defs>
-  <rect width="${W}" height="${H}" fill="url(#c${id})"/>
-  <circle cx="${W*(o.sol||.75)}" cy="${H*.13}" r="${26*k}" fill="#F5A532" opacity="${o.sujo?.55:1}"/>
-  <g fill="${o.planta||'#3E8E4F'}">
-    <circle cx="${W*.06}" cy="${hz-H*.1}" r="${46*k}"/><circle cx="${W*.2}" cy="${hz-H*.08}" r="${34*k}"/>
-    <circle cx="${W*.9}" cy="${hz-H*.11}" r="${50*k}"/><circle cx="${W*.76}" cy="${hz-H*.07}" r="${28*k}"/>
-  </g>
-  <rect y="${hz-H*.07}" width="${W}" height="${H*.13}" fill="${o.muro||'#F3EDE2'}"/>
-  <rect y="${hz+H*.06}" width="${W}" height="${H}" fill="${o.piso}"/>
-  <path d="M${x1} ${y1}H${x2}L${x3} ${y2}H${x4}Z" fill="url(#a${id})" stroke="#fff" stroke-width="${9*k}" stroke-linejoin="round"/>
-  ${agua}${vara}
-  </svg>`;
-}
-
-const LIMPA  = ['#5FD6EC','#19B5D6'];
-const CEU_OK = ['#8FD3F2','#DDF3FB'];
-const CEU_RUIM = ['#9FB3B8','#D9DFDA'];
-
-/* Abertura: três cenas que se alternam sozinhas */
-const heroCenas = {
-  h1:{w:1600,h:900,ceu:CEU_RUIM,agua:['#6F8F3E','#40622C'],mancha:'#2F4A1E',piso:'#CFC4B0',sujo:true,vara:true},
-  h2:{w:1600,h:900,ceu:['#A9CFE0','#E2EEF0'],agua:['#63B7A6','#2E8F8C'],mancha:'#2C7468',piso:'#D9CDB8',sujo:true,folhas:2,vara:true,sol:.3},
-  h3:{w:1600,h:900,ceu:CEU_OK,agua:LIMPA,piso:'#E6DAC6',sol:.6}
-};
-document.querySelectorAll('.slide[data-cena]').forEach(s=>s.innerHTML=cena(heroCenas[s.dataset.cena]));
 const slides=[...document.querySelectorAll('.slide')], pontos=[...document.querySelectorAll('.pontos i')];
 let atual=0;
 /* Troca de foto: 3 s no computador, 2,5 s no celular */
@@ -671,37 +565,6 @@ const celular=matchMedia('(max-width:820px)');
   }, celular.matches ? 2500 : 3000);
 })();
 
-/* Antes e depois: fotos em fotos/antes-depois (geradas por ferramentas/antes-depois.ps1).
-   Para usar fotos de clientes, troque  foto:'1-verde'  pelo nome dos arquivos  X-antes.webp / X-depois.webp. */
-const trabalhos = [
-  {foto:'1-verde',    obs:'Água verde → cristalina'},
-  {foto:'2-turva',    obs:'Água turva → transparente'},
-  {foto:'3-folhas',   obs:'Folhas e sujeira removidas'},
-  {foto:'4-algas',    obs:'Algas no fundo → fundo limpo'},
-  {foto:'5-barrenta', obs:'Água barrenta → azul'}
-];
-const trilho=document.getElementById('trilho');
-trabalhos.forEach((t,i)=>{
-  const foto=(lado,alt)=>`<img src="fotos/antes-depois/${t.foto}-${lado}.webp" alt="${alt}" loading="${i<3?'eager':'lazy'}" draggable="false">`;
-  const c=document.createElement('article');
-  c.className='cartao';
-  c.innerHTML=`<div class="img">${foto('depois','Piscina depois da limpeza')}</div><div class="img antes">${foto('antes','Piscina antes da limpeza')}</div>
-    <div class="divisor"></div><span class="etq a">Antes</span><span class="etq d">Depois</span>
-    <div class="legenda"><small>${t.obs}</small></div>
-    <input type="range" min="0" max="100" value="50" aria-label="Comparar antes e depois: ${t.obs}">`;
-  c.querySelector('input').addEventListener('input',e=>c.style.setProperty('--p',e.target.value+'%'));
-  trilho.appendChild(c);
-});
-const passo=()=>trilho.querySelector('.cartao').offsetWidth+20;
-const irPara=d=>{
-  const c=[...trilho.children], max=trilho.scrollWidth-trilho.clientWidth;
-  const i=Math.max(0,Math.min(c.length-1,Math.round(trilho.scrollLeft/passo())+d));
-  trilho.scrollTo({left:Math.min(max,c[i].offsetLeft-c[0].offsetLeft),behavior:'smooth'});
-};
-document.querySelector('.seta.esq').onclick=()=>irPara(-1);
-document.querySelector('.seta.dir').onclick=()=>irPara(1);
-
-/* Cabeçalho e animações de entrada */
 /* Trabalhos realizados: fotos em fotos/trabalhos/ (geradas por ferramentas/trabalhos.ps1).
    Com "antes" e "depois" o cartão alterna entre as duas fotos; com "foto" mostra uma só. */
 const realizados = [
