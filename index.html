@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>O Piscineiro — Garantindo o seu lazer</title>
+<meta name="description" content="O Piscineiro: limpeza e tratamento de piscinas. Veja o antes e depois do nosso trabalho.">
+<link rel="icon" type="image/svg+xml" href="icone.svg">
+<link rel="apple-touch-icon" href="icone.svg">
+<!-- Prévia ao compartilhar o link. Depois de publicar, troque og:image pelo endereço completo, ex.: https://seusite.com.br/fotos/compartilhar.jpg -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="O Piscineiro — Garantindo o seu lazer">
+<meta property="og:description" content="Limpeza e tratamento de piscinas em Barra Velha, SC. Veja o antes e depois do nosso trabalho.">
+<meta property="og:image" content="fotos/compartilhar.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0B3C5D">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Poppins:ital,wght@1,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0B3C5D; --navy-d:#072A42; --sun:#F5A532; --aqua:#19B5D6;
+  --white:#fff; --foam:#EAF7FB; --ink:#14324A;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',system-ui,sans-serif;color:var(--ink);background:var(--white);overflow-x:hidden}
+svg{display:block}
+
+/* ---------- Cabeçalho ---------- */
+.topo{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;justify-content:center;align-items:center;
+  gap:14px;padding:14px 20px;border-bottom:2px solid var(--sun);
+  transition:background .35s,padding .35s,box-shadow .35s}
+.topo.rolou{background:var(--navy);padding:8px 20px;box-shadow:0 6px 24px rgba(0,0,0,.25)}
+.topo svg{width:52px;height:52px;transition:width .35s,height .35s}
+.topo.rolou svg{width:42px;height:42px}
+.topo span{color:#fff;font-weight:700;letter-spacing:.28em;font-size:1.05rem;text-transform:uppercase}
+.topo span b{color:var(--sun);font-weight:700}
+
+/* ---------- 1. Abertura ---------- */
+.hero{position:relative;height:100vh;min-height:560px;background:var(--navy-d);overflow:hidden;
+  display:flex;flex-direction:column;justify-content:flex-end;padding:0 clamp(20px,7vw,120px) clamp(60px,11vh,130px)}
+.slide{position:absolute;inset:0;opacity:0;transition:opacity 1.8s ease}
+.slide.on{opacity:1}
+.slide svg,.slide img{display:block;width:100%;height:100%;object-fit:cover;animation:zoom 18s ease-in-out infinite alternate}
+@keyframes zoom{from{transform:scale(1)}to{transform:scale(1.12)}}
+.hero::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(7,42,66,.72) 0%,rgba(7,42,66,.5) 45%,rgba(7,42,66,.9) 100%)}
+.hero h1,.hero p,.pontos{position:relative;z-index:2}
+.hero h1{color:#fff;font-weight:800;line-height:.95;letter-spacing:.04em;text-transform:uppercase;
+  font-size:clamp(2.6rem,10.5vw,9rem)}
+.hero h1 em{font-style:normal;color:var(--sun)}
+.hero p{margin-top:18px;color:#fff;font-weight:500;letter-spacing:.3em;text-transform:uppercase;
+  font-size:clamp(.9rem,1.6vw,1.3rem)}
+.pontos{display:flex;gap:8px;margin-top:34px}
+.pontos i{width:34px;height:4px;border-radius:2px;background:rgba(255,255,255,.3);transition:background .6s}
+.pontos i.on{background:var(--sun)}
+
+/* ---------- 2. Antes e depois ---------- */
+.antes-depois{background:var(--navy-d);padding:70px 0 80px;color:#fff;text-align:center}
+.antes-depois h2{font-weight:800;font-size:clamp(1.6rem,3.4vw,2.5rem);line-height:1.05;letter-spacing:.06em;text-transform:uppercase}
+.antes-depois h2 em{font-style:normal;color:var(--sun)}
+.antes-depois .sub{margin:14px auto 44px;max-width:420px;padding:0 20px;color:rgba(255,255,255,.65);font-weight:300;font-size:.88rem}
+.carrossel{position:relative;max-width:1560px;margin:0 auto;padding:0 64px}
+.trilho{display:flex;gap:20px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding:4px}
+.trilho::-webkit-scrollbar{display:none}
+.seta{position:absolute;top:50%;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:0;
+  background:transparent;color:#fff;font-size:2rem;line-height:1;cursor:pointer;transition:background .2s,color .2s}
+.seta:hover{background:var(--sun);color:var(--navy-d)}
+.seta.esq{left:10px}.seta.dir{right:10px}
+.cartao{--p:50%;position:relative;flex:0 0 clamp(230px,21vw,270px);aspect-ratio:3/5;border-radius:16px;
+  overflow:hidden;scroll-snap-align:start;background:#123;text-align:left;user-select:none}
+.cartao .img{position:absolute;inset:0}
+.cartao .img svg{width:100%;height:100%}
+.cartao .antes{clip-path:inset(0 calc(100% - var(--p)) 0 0)}
+.cartao .divisor{position:absolute;top:0;bottom:0;left:var(--p);width:3px;margin-left:-1.5px;background:#fff;pointer-events:none}
+.cartao .divisor::after{content:"‹ ›";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:40px;height:40px;border-radius:50%;background:var(--sun);color:var(--navy-d);font-weight:700;
+  display:grid;place-items:center;font-size:1.05rem;box-shadow:0 2px 10px rgba(0,0,0,.35)}
+.cartao input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:ew-resize;margin:0;z-index:3}
+.etq{position:absolute;top:12px;padding:4px 10px;border-radius:99px;font-size:.72rem;font-weight:600;
+  letter-spacing:.12em;text-transform:uppercase;pointer-events:none;z-index:2}
+.etq.a{left:12px;background:rgba(7,42,66,.75);color:#fff}
+.etq.d{right:12px;background:var(--sun);color:var(--navy-d)}
+.legenda{position:absolute;inset:auto 0 0 0;padding:60px 16px 18px;text-align:center;pointer-events:none;z-index:2;
+  background:linear-gradient(transparent,rgba(7,42,66,.9))}
+.legenda strong{display:block;font-size:1.1rem;font-weight:700}
+.legenda small{font-size:.9rem;color:rgba(255,255,255,.85);font-weight:300}
+
+/* ---------- 3. Serviços ---------- */
+.servico{display:grid;grid-template-columns:1fr 1fr;min-height:470px}
+.servico .arte{overflow:hidden;min-height:320px}
+.servico .arte svg{width:100%;height:100%}
+.servico .txt{display:flex;flex-direction:column;justify-content:center;padding:56px clamp(24px,6vw,96px)}
+.servico.inv .arte{order:2}
+.servico.inv .txt{background:var(--navy);color:#fff}
+.servico:not(.inv) .txt{text-align:right;align-items:flex-end}
+.num{font-weight:800;color:var(--sun);letter-spacing:.2em;font-size:.95rem}
+.servico h2{font-size:clamp(1.8rem,3.2vw,2.6rem);font-weight:700;line-height:1.1;margin:8px 0 14px}
+.servico .txt p{font-size:1.15rem;font-weight:300;line-height:1.55;max-width:460px}
+.servico ul{list-style:none;margin-top:20px;display:flex;flex-wrap:wrap;gap:8px}
+.servico:not(.inv) ul{justify-content:flex-end}
+.servico li{border:1.5px solid currentColor;border-radius:99px;padding:6px 16px;font-size:.92rem;font-weight:500}
+.servico.inv li{border-color:var(--aqua);color:var(--aqua)}
+
+/* ---------- 4. Rodapé ---------- */
+footer{background:var(--navy-d);color:#fff;text-align:center;padding:64px 20px 36px}
+footer .logo{width:170px;height:170px;margin:0 auto}
+footer .nome{margin-top:18px;font-weight:700;letter-spacing:.3em;text-transform:uppercase}
+footer .lema{color:var(--aqua);font-weight:300;margin-top:4px}
+.redes{display:flex;justify-content:center;gap:16px;margin-top:26px}
+.redes a{width:50px;height:50px;border-radius:50%;display:grid;place-items:center;color:var(--aqua);
+  border:1.5px solid var(--aqua);transition:all .2s}
+.redes a:hover{background:var(--sun);border-color:var(--sun);color:var(--navy-d);transform:translateY(-3px)}
+.redes svg{width:24px;height:24px}
+footer .fim{margin-top:40px;font-size:.8rem;color:rgba(255,255,255,.45)}
+
+/* ---------- Detalhes em amarelo ---------- */
+.faixa{background:var(--sun);color:var(--navy-d);overflow:hidden;white-space:nowrap;padding:14px 0;
+  font-weight:700;letter-spacing:.18em;text-transform:uppercase;font-size:.95rem}
+.faixa div{display:inline-block;animation:corre 32s linear infinite}
+.faixa{padding:6px 0;font-size:.7rem;line-height:1.4}
+.faixa span{margin:0 18px}
+.faixa i{display:inline-block;width:4px;height:4px;border-radius:50%;background:var(--navy-d);vertical-align:middle;position:relative;top:-1px}
+@keyframes corre{to{transform:translateX(-50%)}}
+.onda{width:150px;height:18px;margin:14px auto 0}
+.servico .arte{position:relative}
+.servico .arte img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover}
+.selo{position:absolute;left:24px;bottom:24px;background:var(--sun);color:var(--navy-d);font-weight:700;
+  padding:10px 20px;border-radius:99px;font-size:1.05rem;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+.servico.inv .selo{left:auto;right:24px}
+.num{font-size:3.4rem;line-height:1;letter-spacing:0}
+.servico h2::after{content:"";display:block;width:64px;height:5px;border-radius:3px;background:var(--sun);margin-top:14px}
+.servico:not(.inv) h2::after{margin-left:auto}
+.servico:not(.inv) li{background:var(--sun);border-color:var(--sun);color:var(--navy-d)}
+.servico.inv li{border-color:var(--sun);color:var(--sun)}
+.seta{border:1.5px solid var(--sun);color:var(--sun)}
+footer{border-top:5px solid var(--sun)}
+.desce{position:absolute;z-index:2;right:clamp(20px,7vw,120px);bottom:clamp(60px,11vh,130px);color:var(--sun);
+  font-size:.8rem;letter-spacing:.25em;text-transform:uppercase;text-decoration:none;writing-mode:vertical-rl;
+  display:flex;align-items:center;gap:10px}
+.desce::after{content:"";width:2px;height:54px;background:var(--sun);transform-origin:top;animation:pulsa 1.8s ease-in-out infinite}
+@keyframes pulsa{0%,100%{transform:scaleY(.3)}50%{transform:scaleY(1)}}
+.subir{position:fixed;right:20px;bottom:20px;z-index:40;width:48px;height:48px;border-radius:50%;border:0;
+  background:var(--sun);color:var(--navy-d);font-size:1.4rem;font-weight:700;cursor:pointer;opacity:0;
+  pointer-events:none;transition:opacity .3s,transform .3s;box-shadow:0 6px 20px rgba(0,0,0,.3)}
+.subir.on{opacity:1;pointer-events:auto}
+.subir:hover{transform:translateY(-3px)}
+@media (max-width:820px){
+  .servico:not(.inv) h2::after{margin-left:0}
+  .desce{display:none}
+}
+@media (prefers-reduced-motion:reduce){.faixa div,.desce::after{animation:none}}
+
+/* ---------- Onde atendemos + WhatsApp ---------- */
+.local{background:var(--foam);display:grid;grid-template-columns:1fr 1.3fr;align-items:center;gap:24px;
+  padding:70px clamp(24px,6vw,96px)}
+.local h2{font-size:clamp(1.8rem,3.2vw,2.6rem);font-weight:700;line-height:1.15;margin:8px 0 14px;color:var(--navy)}
+.local h2 em{font-style:normal;background:linear-gradient(transparent 62%,var(--sun) 62%)}
+.local p{font-size:1.15rem;font-weight:300;line-height:1.55;max-width:440px}
+.local .mapa svg{width:100%;height:auto;border-radius:18px;background:#DDF1F7}
+.rotulo{display:inline-block;background:var(--sun);color:var(--navy-d);font-weight:700;font-size:.85rem;
+  letter-spacing:.18em;text-transform:uppercase;padding:6px 16px;border-radius:99px;margin-bottom:6px}
+.pulso{transform-box:fill-box;transform-origin:center;animation:pulso 2s ease-out infinite}
+@keyframes pulso{from{transform:scale(.4);opacity:.9}to{transform:scale(2.4);opacity:0}}
+.zap{display:inline-flex;align-items:center;gap:10px;margin-top:26px;background:#25D366;color:#fff;font-weight:600;
+  font-size:1.05rem;text-decoration:none;padding:13px 24px;border-radius:99px;box-shadow:0 6px 18px rgba(37,211,102,.35);
+  transition:transform .2s}
+.zap:hover{transform:translateY(-3px)}
+.zap svg{width:24px;height:24px}
+.zap-flut{position:fixed;right:20px;bottom:20px;z-index:45;width:58px;height:58px;border-radius:50%;background:#25D366;
+  color:#fff;display:grid;place-items:center;box-shadow:0 6px 20px rgba(0,0,0,.3);transition:transform .2s}
+.zap-flut:hover{transform:scale(1.08)}
+.zap-flut svg{width:32px;height:32px}
+.subir{right:25px;bottom:92px}
+.local{background:var(--navy);color:#fff}
+.local h2{color:#fff}
+.local h2 em{background:none;color:var(--sun)}
+.local p{color:rgba(255,255,255,.85)}
+.local .mapa svg{box-shadow:0 14px 40px rgba(0,0,0,.3)}
+/* Seção do mapa mais compacta */
+.local{grid-template-columns:auto auto;justify-content:center;gap:clamp(32px,6vw,90px);padding-top:44px;padding-bottom:44px}
+.local h2{font-size:clamp(1.5rem,2.4vw,2rem);max-width:420px}
+.local p{font-size:1rem;max-width:380px}
+.local .mapa{width:min(520px,44vw)}
+.zap{margin-top:20px;padding:11px 20px;font-size:.98rem}
+.local p.email{font-size:.9rem;margin-top:14px;color:rgba(255,255,255,.7)}
+.local p.email a,footer .contato a{color:var(--sun);text-decoration:none;border-bottom:1px solid transparent;transition:border-color .2s}
+.local p.email a:hover,footer .contato a:hover{border-color:var(--sun)}
+footer .contato{font-size:.9rem;margin-top:6px}
+/* Rodapé compacto */
+footer{padding:28px 20px 18px}
+footer .logo{width:96px;height:96px}
+footer .nome{margin-top:10px;font-size:.95rem}
+footer .lema{font-size:.9rem;margin-top:2px}
+.redes{margin-top:14px;gap:12px}
+.redes a{width:40px;height:40px}
+.redes svg{width:20px;height:20px}
+footer .fim{margin-top:16px;font-size:.75rem}
+@media (max-width:820px){.local{grid-template-columns:1fr;padding:40px 24px}.local .mapa{width:100%}}
+@media (prefers-reduced-motion:reduce){.pulso{animation:none;opacity:0}}
+
+/* Carrossel: 3 cartões visíveis por vez */
+.carrossel{--cw:clamp(230px,21vw,270px);max-width:calc(3 * var(--cw) + 40px + 8px + 128px)}
+.cartao{flex-basis:var(--cw)}
+.trilho{scroll-padding-left:4px}
+.seta,.seta:hover{border:0;background:none;color:var(--sun)}
+.seta{font-size:2.6rem;transition:transform .2s}
+.seta:hover{transform:translateY(-50%) scale(1.25)}
+@media (max-width:820px){.carrossel{max-width:none}.cartao{flex-basis:72vw}}
+
+/* Nome da marca em negrito itálico sem serifa */
+.hero h1,.hero h1 em,.marca span,.marca span b{font-family:'Poppins',Arial,sans-serif;font-style:italic;font-weight:800}
+.hero h1,.marca span{color:var(--sun)}
+.hero h1 em,.marca span b{color:#fff}
+.hero h1{letter-spacing:.02em;font-size:clamp(2.1rem,7vw,6rem)}
+.hero p{font-size:clamp(.75rem,1.15vw,1rem);margin-top:12px}
+.pontos{margin-top:24px}
+.marca span{letter-spacing:.16em;font-size:1.15rem}
+
+/* ---------- Perguntas frequentes ---------- */
+.faq{background:var(--foam);color:var(--ink);display:grid;grid-template-columns:minmax(220px,1fr) 2.2fr;
+  gap:clamp(28px,6vw,96px);align-items:start;
+  padding:72px max(24px,calc((100% - 1120px)/2)) 80px}
+.faq h2{font-family:'Poppins',Arial,sans-serif;font-style:italic;font-weight:800;color:var(--navy);
+  font-size:clamp(1.4rem,2.3vw,1.95rem);line-height:1.08;margin-top:10px}
+.faq h2 em{font-style:italic;color:var(--sun)}
+.faq details{border-bottom:1px solid rgba(11,60,93,.22)}
+.faq details:first-child{border-top:1px solid rgba(11,60,93,.22)}
+.faq summary{list-style:none;cursor:pointer;padding:24px 0;font-weight:400;font-size:1.18rem;line-height:1.35;
+  display:flex;justify-content:space-between;align-items:center;gap:24px;transition:color .2s}
+.faq summary:hover{color:#0E7FA6}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";flex:none;width:22px;height:22px;transition:transform .25s;
+  background:linear-gradient(var(--navy),var(--navy)) center/100% 2px no-repeat,
+             linear-gradient(var(--navy),var(--navy)) center/2px 100% no-repeat}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{padding:0 56px 26px 0;font-weight:300;line-height:1.65;color:var(--ink)}
+.faq details a{color:var(--navy);font-weight:600}
+@media (max-width:820px){
+  .faq{grid-template-columns:1fr;padding:52px 24px 60px}
+  .faq summary{font-size:1.05rem;padding:20px 0}
+  .faq details p{padding-right:0}
+}
+
+/* Título do mapa na fonte da marca, etiquetas de canto reto, botões flutuantes sem fundo */
+.local h2,.local h2 em{font-family:'Poppins',Arial,sans-serif;font-style:italic;font-weight:800}
+.rotulo{border-radius:0;font-size:.7rem;padding:4px 11px;letter-spacing:.16em}
+.zap-flut,.subir{background:none;box-shadow:none;filter:drop-shadow(0 2px 5px rgba(0,0,0,.45))}
+.zap-flut{color:#25D366}
+.zap-flut{width:46px;height:46px}
+.zap-flut svg{width:36px;height:36px}
+.subir{color:var(--sun);font-size:1.65rem;right:19px;bottom:68px}
+
+/* Botão "Chamar no WhatsApp": contorno amarelo que se enche de água ao passar o mouse */
+.zap{position:relative;overflow:hidden;isolation:isolate;align-items:stretch;gap:0;padding:0;margin-top:22px;
+  background:none;border:2px solid var(--sun);border-radius:0;box-shadow:none;color:#fff;
+  font-weight:600;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;
+  transition:border-color .5s,color .4s}
+.zap::before{content:"";position:absolute;z-index:-1;left:0;bottom:0;width:100%;height:150%;
+  transform:translateY(101%);transition:transform .8s cubic-bezier(.3,.7,.2,1);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 14' preserveAspectRatio='none'%3E%3Cpath d='M0 7q10-9 20 0t20 0t20 0t20 0V14H0z' fill='%2319B5D6'/%3E%3C/svg%3E") 0 0/80px 14px repeat-x,
+    linear-gradient(#19B5D6,#19B5D6) 0 13px/100% 100% no-repeat;
+  animation:mare 1.6s linear infinite}
+@keyframes mare{to{background-position:80px 0,0 13px}}
+.zap:hover{transform:none;border-color:var(--aqua);color:var(--navy-d)}
+.zap:hover::before{transform:translateY(0)}
+.zap-ico{display:grid;place-items:center;width:46px;background:var(--sun);color:var(--navy-d);transition:background .5s}
+.zap:hover .zap-ico{background:#fff}
+.zap .zap-ico svg{width:22px;height:22px}
+.zap-txt{padding:14px 12px 14px 18px}
+.zap-seta{display:grid;place-items:center;padding-right:18px;font-size:1.15rem;letter-spacing:0;transition:transform .35s}
+.zap:hover .zap-seta{transform:translateX(6px)}
+@media (prefers-reduced-motion:reduce){.zap::before{animation:none;transition:none}}
+
+/* Nome no topo: as letras se enchem de água ao passar o mouse */
+@property --nivel{syntax:'<length>';inherits:false;initial-value:30px}
+@property --onda{syntax:'<length>';inherits:false;initial-value:0px}
+.marca span{position:relative;display:inline-block}
+.marca span::after{content:attr(data-texto);position:absolute;inset:0;white-space:nowrap;pointer-events:none;
+  color:transparent;-webkit-text-fill-color:transparent;
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 8' preserveAspectRatio='none'%3E%3Cpath d='M0 4q3-4 6 0t6 0t6 0t6 0V8H0z' fill='%2319B5D6'/%3E%3C/svg%3E") var(--onda) var(--nivel)/24px 8px repeat-x,
+    linear-gradient(#19B5D6,#19B5D6) 0 calc(var(--nivel) + 7px)/100% 3em no-repeat;
+  -webkit-background-clip:text;background-clip:text;
+  transition:--nivel .9s cubic-bezier(.3,.7,.2,1);animation:onda-nome 1.2s linear infinite}
+@keyframes onda-nome{to{--onda:24px}}
+.marca:hover span::after,.marca:focus-visible span::after{--nivel:-6px}
+@media (prefers-reduced-motion:reduce){.marca span::after{animation:none;transition:none}}
+
+/* Todos os títulos de seção na fonte da marca */
+.antes-depois h2,.antes-depois h2 em,.servico h2{font-family:'Poppins',Arial,sans-serif;font-style:italic;font-weight:800}
+.antes-depois h2{text-transform:none;letter-spacing:0;font-size:clamp(1.5rem,2.6vw,2.1rem)}
+.servico h2{font-size:clamp(1.5rem,2.4vw,2rem);margin-top:0}
+
+/* Cantos retos em todo o site (pontos e marcadores redondos continuam redondos) */
+.cartao,.etq,.selo,.servico li,.local .mapa svg,.pontos i,.servico h2::after,.redes a,
+.cartao .divisor::after,.menu-btn span{border-radius:0}
+
+/* Ajustes da revisão no celular */
+@media (max-width:820px){
+  .hero h1{font-size:2.55rem}
+  footer{padding-bottom:96px}
+  /* Fade entre as fotos da abertura 30% mais curto */
+  .slide{transition-duration:1.26s}
+  /* Menu aberto mais compacto */
+  .topo .menu{padding:0 20px 6px}
+  .topo .menu a{padding:10px 0;font-size:11px}
+  /* Setas do carrossel no celular: fundo escuro translúcido, acima da linha do controle de arrastar */
+  .carrossel .seta,.carrossel .seta:hover{display:grid;place-items:center;top:50%;transform:translateY(-50%);
+    width:34px;height:50px;padding:0;z-index:5;border-radius:0;background:rgba(0,0,0,.42);color:#fff;font-size:1.5rem;line-height:1}
+  .carrossel .seta.esq{left:16px}
+  .carrossel .seta.dir{right:16px}
+}
+
+/* Entrada suave da abertura */
+@keyframes entra{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.hero h1{animation:entra 1s cubic-bezier(.2,.7,.2,1) .15s both}
+.hero p{animation:entra 1s cubic-bezier(.2,.7,.2,1) .4s both}
+.pontos{animation:entra 1s cubic-bezier(.2,.7,.2,1) .6s both}
+.desce{animation:entra 1s cubic-bezier(.2,.7,.2,1) .85s both}
+.topo{animation:entra-topo .8s ease-out both}
+@keyframes entra-topo{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.hero h1,.hero p,.pontos,.desce,.topo{animation:none}}
+
+/* ---------- Menu ---------- */
+.topo{justify-content:space-between;padding-left:clamp(20px,5vw,60px);padding-right:clamp(20px,5vw,60px)}
+.topo.rolou{padding:8px clamp(20px,5vw,60px)}
+.marca{display:flex;align-items:center;gap:14px;text-decoration:none}
+.menu{display:flex;gap:30px}
+.menu a{color:#fff;text-decoration:none;font-weight:500;font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+  padding:6px 0;border-bottom:2px solid transparent;transition:color .2s,border-color .2s}
+.menu a:hover{color:var(--sun);border-color:var(--sun)}
+.menu-btn{display:none;background:none;border:0;width:42px;height:42px;padding:8px;cursor:pointer}
+.menu-btn span{display:block;height:3px;background:#fff;border-radius:2px;margin:5px 0}
+section{scroll-margin-top:62px}
+@media (max-width:820px){
+  .menu-btn{display:block}
+  .menu{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;gap:0;background:var(--navy);
+    padding:4px 24px 14px;border-bottom:2px solid var(--sun)}
+  .menu.aberto{display:flex}
+  .menu a{padding:15px 0;border-bottom:1px solid rgba(255,255,255,.14);font-size:13px}
+}
+
+/* ---------- Animação de entrada ---------- */
+.surge{opacity:0;transform:translateY(28px);transition:opacity .8s,transform .8s}
+.surge.visto{opacity:1;transform:none}
+
+@media (max-width:820px){
+  .servico{grid-template-columns:1fr}
+  .servico.inv .arte{order:0}
+  .servico .txt,.servico:not(.inv) .txt{text-align:left;align-items:flex-start;padding:44px 24px}
+  .servico:not(.inv) ul{justify-content:flex-start}
+  .carrossel{padding:0 16px}
+  .seta{display:none}
+  .cartao{flex-basis:72vw}
+  .topo span{font-size:.9rem;letter-spacing:.2em}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .slide svg,.slide img{animation:none}
+  .surge{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Logo (definida uma vez, reutilizada no topo e no rodapé) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="zap" viewBox="0 0 24 24">
+    <path d="M12 3a9 9 0 0 0-7.700 13.600L3 21l4.500-1.200A9 9 0 1 0 12 3z" fill="none" stroke="currentColor" stroke-width="1.700" stroke-linejoin="round"/>
+    <path d="M9.100 7.300c.3 0 .5.2.6.5l.6 1.600c.1.3 0 .6-.2.8l-.6.6c.6 1.300 1.600 2.300 2.900 2.900l.6-.6c.2-.2.5-.3.8-.2l1.600.6c.3.1.5.3.5.6v1c0 .6-.5 1.100-1.100 1.100-4.200-.2-7.600-3.600-7.800-7.800 0-.6.5-1.100 1.100-1.100z" fill="currentColor"/>
+  </symbol>
+  <symbol id="logo" viewBox="0 0 300 300"><g id="fundo-circulo">
+<circle cx="150" cy="150" r="146" fill="#0B3C5D"/>
+</g>
+<g id="sol">
+<line x1="150.0" y1="92.0" x2="150.0" y2="78.0" stroke="#F5A532" stroke-width="7" stroke-linecap="round"/>
+<line x1="180.4" y1="104.6" x2="190.3" y2="94.7" stroke="#F5A532" stroke-width="7" stroke-linecap="round"/>
+<line x1="193.0" y1="135.0" x2="207.0" y2="135.0" stroke="#F5A532" stroke-width="7" stroke-linecap="round"/>
+<line x1="119.6" y1="104.6" x2="109.7" y2="94.7" stroke="#F5A532" stroke-width="7" stroke-linecap="round"/>
+<line x1="107.0" y1="135.0" x2="93.0" y2="135.0" stroke="#F5A532" stroke-width="7" stroke-linecap="round"/>
+<circle cx="150" cy="135" r="32" fill="#F5A532"/>
+</g>
+<g id="mar-cobre-sol">
+<path d="M80 166 q17.5 -12 35 0 t35 0 t35 0 t35 0 V232 H80 Z" fill="#0B3C5D"/>
+</g>
+<g id="onda-1">
+<path d="M84 168 q16.5 -12 33 0 t33 0 t33 0 t33 0" fill="none" stroke="#19B5D6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="onda-2">
+<path d="M100 192 q16.7 -11 33.3 0 t33.3 0 t33.3 0" fill="none" stroke="#19B5D6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+</g>
+<g id="anel">
+<circle cx="150" cy="150" r="102" fill="none" stroke="#F5A532" stroke-width="3"/>
+</g>
+<g id="texto-circular">
+<text x="67.8" y="59.8" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(-42.4 67.8 59.8)">A</text>
+<text x="85.8" y="46.3" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(-31.8 85.8 46.3)">Q</text>
+<text x="105.9" y="36.2" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(-21.2 105.9 36.2)">U</text>
+<text x="127.6" y="30.1" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(-10.6 127.6 30.1)">A</text>
+<text x="150.0" y="28.0" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(0.0 150.0 28.0)">C</text>
+<text x="172.4" y="30.1" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(10.6 172.4 30.1)">L</text>
+<text x="194.1" y="36.2" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(21.2 194.1 36.2)">A</text>
+<text x="214.2" y="46.3" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(31.8 214.2 46.3)">R</text>
+<text x="232.2" y="59.8" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(42.4 232.2 59.8)">A</text>
+<text x="259.2" y="95.6" font-family="Outfit" font-weight="600" font-size="19" fill="#F5A532" text-anchor="middle" dominant-baseline="central" transform="rotate(63.5 259.2 95.6)">★</text>
+<text x="271.5" y="138.7" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(84.7 271.5 138.7)">L</text>
+<text x="271.5" y="161.3" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(95.3 271.5 161.3)">I</text>
+<text x="267.3" y="183.4" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(105.9 267.3 183.4)">M</text>
+<text x="259.2" y="204.4" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(116.5 259.2 204.4)">P</text>
+<text x="247.4" y="223.5" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(127.1 247.4 223.5)">E</text>
+<text x="232.2" y="240.2" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(137.6 232.2 240.2)">Z</text>
+<text x="214.2" y="253.7" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(148.2 214.2 253.7)">A</text>
+<text x="172.4" y="269.9" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(169.4 172.4 269.9)">D</text>
+<text x="150.0" y="272.0" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(180.0 150.0 272.0)">E</text>
+<text x="105.9" y="263.8" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(201.2 105.9 263.8)">P</text>
+<text x="85.8" y="253.7" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(211.8 85.8 253.7)">I</text>
+<text x="67.8" y="240.2" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(222.4 67.8 240.2)">S</text>
+<text x="52.6" y="223.5" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(232.9 52.6 223.5)">C</text>
+<text x="40.8" y="204.4" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(243.5 40.8 204.4)">I</text>
+<text x="32.7" y="183.4" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(254.1 32.7 183.4)">N</text>
+<text x="28.5" y="161.3" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(264.7 28.5 161.3)">A</text>
+<text x="28.5" y="138.7" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(275.3 28.5 138.7)">S</text>
+<text x="40.8" y="95.6" font-family="Outfit" font-weight="600" font-size="19" fill="#F5A532" text-anchor="middle" dominant-baseline="central" transform="rotate(296.5 40.8 95.6)">★</text>
+</g></symbol>
+</svg>
+
+<header class="topo" id="topo">
+  <a class="marca" href="#inicio" aria-label="O Piscineiro — voltar ao início">
+    <svg role="img" aria-label="Logo O Piscineiro"><use href="#logo"/></svg>
+    <span data-texto="O Piscineiro"><b>O</b> Piscineiro</span>
+  </a>
+  <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  <nav class="menu" id="menu">
+    <a href="#antes-depois">Antes e depois</a>
+    <a href="#ph">Serviços</a>
+    <a href="#onde">Onde atendemos</a>
+    <a href="#duvidas">Dúvidas</a>
+  </nav>
+</header>
+
+<!-- ============ 1. ABERTURA ============ -->
+<section class="hero" id="inicio">
+  <!-- Para usar fotos reais: troque o conteúdo de cada .slide por <img src="fotos/hero1.jpg" style="width:100%;height:100%;object-fit:cover"> -->
+  <!-- Fotos de uso livre do Unsplash (unsplash.com/license) -->
+  <div class="slide on"><img src="fotos/abertura-1.jpg" alt="Profissional limpando uma piscina"></div>
+  <div class="slide"><img src="fotos/abertura-2.jpg" alt="Limpador robótico no fundo de uma piscina"></div>
+  <div class="slide"><img src="fotos/abertura-3.jpg" alt="Piscina limpa com pátio e flores"></div>
+  <h1><em>O</em> Piscineiro</h1>
+  <p>“Garantindo o seu lazer”</p>
+  <div class="pontos"><i class="on"></i><i></i><i></i></div>
+  <a class="desce" href="#antes-depois">Role para ver</a>
+</section>
+
+<div class="faixa" aria-hidden="true"><div>
+  <span>Análise de pH</span><i></i><span>Cloro na medida certa</span><i></i><span>Limpeza especializada</span><i></i><span>Água cristalina</span><i></i><span>Garantindo o seu lazer</span><i></i>
+  <span>Análise de pH</span><i></i><span>Cloro na medida certa</span><i></i><span>Limpeza especializada</span><i></i><span>Água cristalina</span><i></i><span>Garantindo o seu lazer</span><i></i>
+</div></div>
+<button class="subir" id="subir" aria-label="Voltar ao topo">↑</button>
+
+<!-- ============ 2. ANTES E DEPOIS ============ -->
+<section class="antes-depois" id="antes-depois">
+  <h2 class="surge">Antes <em>e</em> depois</h2>
+  <svg class="onda" viewBox="0 0 150 18" aria-hidden="true"><path d="M4 12q11.8-10 23.6 0t23.6 0t23.6 0t23.6 0t23.6 0t23.6 0" fill="none" stroke="#F5A532" stroke-width="5" stroke-linecap="round"/></svg>
+  <p class="sub surge">Arraste o controle de cada piscina para comparar como ela estava e como ficou.</p>
+  <div class="carrossel">
+    <button class="seta esq" aria-label="Anterior">‹</button>
+    <div class="trilho" id="trilho"></div>
+    <button class="seta dir" aria-label="Próximo">›</button>
+  </div>
+</section>
+
+<!-- ============ 3. SERVIÇOS ============ -->
+<section class="servico" id="ph">
+  <div class="arte">
+    <img src="fotos/servico-ph.jpg" alt="Mão segurando dois tubos de teste com líquido azul e amarelo" style="object-position:50% 48%" loading="lazy"><span class="selo">pH ideal: 7,2 – 7,6</span>
+  </div>
+  <div class="txt surge">
+    <h2>Análise e ajuste de pH</h2>
+    <p>Medimos a água a cada visita e corrigimos o pH para a faixa ideal. Água equilibrada não arde nos olhos, não resseca a pele e protege o revestimento e os equipamentos.</p>
+    <ul><li>pH entre 7,2 e 7,6</li><li>Alcalinidade</li><li>Teste a cada visita</li></ul>
+  </div>
+</section>
+
+<section class="servico inv" id="cloro">
+  <div class="arte">
+    <img src="fotos/servico-cloro.jpg" alt="Água cristalina sobre os azulejos de uma piscina" loading="lazy"><span class="selo">Cloro livre: 1 – 3 ppm</span>
+  </div>
+  <div class="txt surge">
+    <h2>Cloro na medida certa</h2>
+    <p>Nem de mais, nem de menos. Dosamos o cloro conforme o volume e o uso da sua piscina, mantendo a água desinfetada e segura sem cheiro forte nem irritação.</p>
+    <ul><li>Cloro livre de 1 a 3 ppm</li><li>Dosagem por volume</li><li>Água sempre própria para banho</li></ul>
+  </div>
+</section>
+
+<section class="servico" id="limpeza">
+  <div class="arte">
+    <img src="fotos/servico-limpeza.jpg" alt="Ferramentas de limpeza de piscina sobre um deck" loading="lazy">
+  </div>
+  <div class="txt surge">
+    <h2>Limpeza especializada</h2>
+    <p>Peneiramos a superfície, escovamos paredes e bordas, aspiramos o fundo e cuidamos do filtro. Você só precisa se preocupar em aproveitar.</p>
+    <ul><li>Peneiração</li><li>Escovação</li><li>Aspiração</li><li>Limpeza do filtro</li></ul>
+  </div>
+</section>
+
+<!-- ============ ONDE ATENDEMOS ============ -->
+<section class="local" id="onde">
+  <div class="surge">
+    <span class="rotulo">Onde atendemos</span>
+    <h2>Atendemos em <em>Barra Velha</em>, Santa Catarina</h2>
+    <p>Cuidamos das piscinas de Barra Velha, no litoral norte catarinense. Fale com a gente pelo WhatsApp.</p>
+    <a class="zap" data-zap href="#" target="_blank" rel="noopener"><span class="zap-ico"><svg><use href="#zap"/></svg></span><span class="zap-txt">Chamar no WhatsApp</span><span class="zap-seta" aria-hidden="true">→</span></a>
+    <p class="email">Ou escreva para <a href="mailto:opiscineirobarravelha@gmail.com">opiscineirobarravelha@gmail.com</a></p>
+  </div>
+  <div class="mapa"><svg viewBox="0 0 760 520" role="img" aria-label="Mapa do Sul do Brasil com Santa Catarina em destaque e uma seta saindo de Barra Velha">
+      <defs><marker id="ponta" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#0B3C5D"/></marker></defs>
+      <path d="M382.5 -111L380.4 -110.8L379.2 -108.4L376.9 -108.7L375.7 -107.5L374.7 -106L372.2 -105L370.6 -107L369.4 -107.7L366.9 -107.9L364.9 -108.8L364.4 -110.2L362.1 -110.8L360.2 -112.2L358.4 -110.6L355.3 -110.3L353.7 -111L352.7 -110.4L351 -110.6L349.5 -111.4L345.7 -111.6L342.4 -111.2L339.1 -110.2L335.8 -113.2L334.2 -112.4L332.4 -110.3L330.6 -109.1L327.9 -109.9L326.6 -108.5L324.7 -108.2L325 -106.6L324 -105.9L323.2 -104L321.8 -103.5L320.3 -102.4L318.5 -99.3L317.3 -98.9L314.3 -103.6L313.7 -105.4L312 -105L311.9 -103.3L308.4 -102.7L305.3 -100.4L302.6 -99L299 -100.4L297.4 -99.8L295.5 -100.6L293.8 -100.7L292.9 -99L291.8 -97.8L288.6 -98.1L287.3 -97.5L284.6 -97.3L283 -96.6L281.5 -94.1L280.8 -92.2L278.8 -91L278.1 -88.4L277 -87.3L275.5 -86L276.1 -83.5L275.8 -82L274.6 -79.8L272.7 -78.1L270.4 -78.3L269 -76.6L267.1 -76.1L266.6 -73.9L264 -71.8L261.7 -66.2L263.6 -64.1L262.7 -63.1L259.5 -64.4L258.4 -63L259.7 -61.2L259.9 -59.6L257.5 -59.2L255.6 -54.9L255.3 -53.1L255.8 -50.8L256.3 -47.4L257.1 -45.9L256.2 -43.7L256.8 -42.2L256.4 -40L257 -38.4L258.2 -40.5L260.5 -42.2L262.9 -43.4L265.2 -44.6L268.9 -45.5L271.6 -47.8L273 -49.7L277.1 -51.2L279.1 -50.4L282.1 -47.5L285.6 -47.2L288.3 -47.2L290.8 -47.3L293.2 -45.5L294.7 -45.1L298.4 -44.6L300.4 -44.2L304.3 -45.2L308.7 -44.9L311.8 -46L313.2 -45.6L314 -44.1L315.5 -42.9L319.2 -42.6L321.4 -43.7L323.2 -43.3L321.4 -41.3L321 -39.5L321.1 -37.1L321.3 -35L322.6 -32.4L324.1 -29.2L325.7 -28.8L328.1 -30.6L330.1 -35.6L333.2 -34.8L333.7 -33.3L333.9 -30.3L334 -25.1L336.3 -23.6L337.7 -25.2L337.2 -27L337.3 -28.6L336.9 -30.4L338.2 -33L339.4 -35.2L340.9 -35.1L342.9 -35.7L346 -35L348 -36.3L350.1 -36.4L351.9 -36.2L353.4 -36.7L355.1 -37.2L358.5 -37.2L360.4 -36L362.2 -36.6L360.9 -38.7L361.8 -40.8L362.8 -40.1L363.7 -38L366.5 -35.9L369.7 -36.8L370.4 -37.7L371.2 -40.5L372.5 -39.5L373 -37.4L374.2 -36.7L375.4 -38.8L375.7 -40.1L375.2 -41.2L376.1 -42.4L379.4 -42.6L381.3 -42.9L382.7 -41.9L384.1 -40L385.8 -40.9L386.2 -42.1L389.7 -43.3L392.2 -41.4L391.6 -40L392.8 -38.6L394.2 -38.4L395.8 -37.2L397 -35.9L398.3 -35.3L399.5 -32.8L397.8 -29.8L397 -27.4L397.4 -25L397.2 -23.1L399.8 -21.4L402.4 -20.2L403 -18.4L403.6 -16.3L404.6 -15L404.4 -13.4L403.5 -12.2L401.8 -12.5L401.2 -11.3L401.1 -9.6L399.7 -8.4L399.7 -6.1L399.2 -4.8L401.4 -1.9L402.8 -0.7L402.6 1.5L402.9 3.6L403.9 4.4L403.2 5.6L403.8 7.8L405.4 10.1L406.6 11.2L407.6 14.4L407.7 17.6L410.8 17.9L412.6 17.1L414.2 16.3L416.5 15.6L418.1 16.5L420.5 15.8L422.8 18.1L424.2 17.9L426.4 18.9L426.8 20.5L426.3 22.3L426.7 23.7L425.1 27.4L422.8 28.4L422.2 32.3L419.9 35.2L421.6 37L420.6 38.3L421.7 41L422.7 41.8L421.5 42.4L420.1 43.6L420.9 44.9L418.8 45.5L421.6 45.9L422.9 48.3L421.6 49.6L420.3 51.1L419.3 52.8L418.7 54.9L421.1 57.4L420.8 59.4L422.7 60.4L425.1 60.8L425.5 62.8L428.8 63.9L430.4 65.4L430 67.2L431.2 69.8L428.3 70.3L428.9 72.6L431.9 73.4L433.5 74.2L432.4 75.1L431.9 76.4L431.8 78.8L433 80L435.5 78.9L438.8 78.3L440.7 78.5L440.8 80.8L442.4 79.6L444.1 79.7L445.7 79.4L447.7 77.7L449.5 76.8L450.9 78.6L451.8 77.2L454.8 77.1L456.9 74.3L456.1 72.3L453.4 73L453.2 71.3L455.8 69.7L457.5 69.3L456.2 68L458.2 66.1L458.9 67.2L458.1 68.7L460.5 68.8L462 67.3L462.7 68.4L461.9 69.4L464 69.2L465.4 68.4L465.7 66.8L467.9 68.1L468.7 69.5L471.3 67.9L473.7 67.7L474.2 66.4L477.1 65L479.1 62.9L481.8 61.8L484.2 61.6L486.1 61L488 60.1L489.7 60L491 59L494.1 57.2L496.5 57.7L499.2 55.6L501.1 56L502.9 54.8L505.3 52.6L508 52.7L509.6 52.9L510.6 52.2L511.8 53.3L514.5 52.1L515.8 51.5L517.8 49.3L520.4 48.4L522.5 48.1L527.6 46.2L530.1 44.8L531.8 46L532.6 45.2L534.2 45.6L535 44.7L536 45.5L537.1 44.3L538 45.7L539.6 45.1L541.9 45.1L546.3 42.2L550.6 42.6L551.8 43.6L553 42.9L554.5 43.2L553.6 45.1L554.1 46.4L555.4 45.5L558.2 44.8L559.4 43.4L562.9 41.6L563.9 40.3L567.5 39L572.1 36.7L574.3 35.5L579.7 33L583 31.4L584.6 31.3L587.2 30L586.9 28.5L585.8 27.5L584.4 27.7L583.9 24.9L586.4 22.2L587.5 20.3L586.2 19.3L586.8 18L588.5 15.4L588.3 13.4L588.6 11.9L590.1 10.5L589.6 9.3L589.4 7.5L590.6 5.5L592.8 3.1L594.2 1.3L591.9 -0.3L595.8 -3L598 -2.7L598.7 -4.9L599.9 -6.6L600 -8.7L602 -9.8L602.9 -13L604.3 -14.6L603.2 -16.8L603.7 -18.6L604.6 -19.4L603.8 -21.7L604.7 -24.3L603.4 -24.8L602.6 -26.3L604 -28.9L605.5 -29.6L605.7 -31.1L606.4 -33.3L609.9 -33.3L619.3 -33.3L620.6 -34.1L621.6 -36.2L622.5 -39.6L623.4 -41.3L623.3 -43.2L623.8 -44.6L625.8 -44.6L626.4 -45.9L628 -46.6L628.1 -48.4L628.8 -50.1L628.4 -51.8L628.5 -53.9L628.7 -55.8L630.9 -57.1L631.3 -58.6L633.6 -60L633.5 -62.3L635.5 -62.7L637.1 -64.6L636.3 -66.2L637.7 -67.9L637.4 -69.5L637.9 -71.3L637.1 -72.3L637.6 -73.4L637.3 -76.4L636.4 -78.9L634.8 -79.8L632.7 -81.6L632.3 -82.9L633.8 -84.4L632.6 -86.3L631.1 -86.8L629.9 -88.6L628.8 -90L626.9 -89.1L625.8 -90.1L626.3 -92.5L629.5 -92.5L630.9 -90.8L634.1 -90.8L636.4 -90.7L638.2 -91.7L637.3 -93.6L637.3 -97L634.8 -98L633.1 -99.4L634.1 -103.8L634.2 -106.8L628.2 -107.5L629.6 -109L629 -113.1L631.4 -115.3L631.1 -117.1L633.1 -119.1L634.5 -119.4L638.5 -121.2L640.9 -119.7L643.7 -119.5L643.6 -121.5L638.7 -126.6L641.4 -127.9L644.4 -125.6L646.2 -125L647.8 -125.5L649.2 -126.4L649.8 -128.6L653.3 -130.4L655.3 -129L658.9 -129.2L663.2 -127.2L664.4 -126.8L662.9 -129.3L664.8 -130.4L666.3 -132.2L664.6 -134.6L664.4 -137.2L662.5 -137.4L661.5 -139.7L659.8 -142.1L657 -142.8L655.5 -144.1L654.4 -146.2L653.2 -149.2L650.3 -150.3L650 -153L650.4 -154.4L652.1 -156.1L651.2 -157.4L651.9 -160.1L651 -161.7L651.8 -164.2L652.3 -168.7L653.3 -169.6L654.7 -173.2L656.4 -172.7L659 -173.3L660.3 -171.9L662.2 -172.1L663.4 -175.1L662.7 -176.6L660.6 -176.3L660.3 -177.7L661.1 -179.2L661.2 -180.7L662.4 -185.9L664.2 -186.4L666.3 -185.7L666.4 -188L668.7 -191.1L670.4 -190.8L672.2 -195.4L673.2 -196.9L675.9 -198.1L675.3 -199.8L677.2 -201.8L677.2 -203.9L678.3 -205.2L677.2 -207.2L675.8 -208.8L674.4 -210.3L672.7 -209.9L671.1 -211.6L670 -213.4L668 -213.9L666.3 -215.4L665 -216.1L663.9 -218.3L661.7 -217.7L658.6 -217.6L656.8 -218.2L655.8 -220L653.2 -218.5L651.6 -218.2L649.2 -221.8L647.1 -222.6L646.4 -224L644.7 -223.3L642 -224.8L641 -223.3L638.7 -222.9L638.3 -224.2L636.4 -224.8L635.9 -223.1L634.8 -222L632.1 -221.8L630.4 -220.8L629.7 -219.6L626.9 -221L624.9 -220.6L622.6 -220.8L622.1 -225.2L621.6 -231L617.8 -234.8L606.3 -246.2L604.7 -247.8L602.1 -247.1L601.1 -245.6L599 -244.6L597.4 -245.3L595.4 -244.8L593.6 -244.3L591.4 -247.9L588.8 -247.8L587.2 -246.8L585 -248.1L583.2 -248.9L580.5 -249.4L580.5 -251.1L579.1 -251.4L577.7 -252.7L576 -253.6L575.1 -254.9L572.7 -254.9L570.5 -257L569 -257.6L567.2 -258.8L564.3 -261.4L562.8 -262.7L561.2 -264.2L559 -264.5L558.1 -265.3L556 -265.3L552.8 -266.7L550.2 -266.4L543.4 -263.8L542 -262.7L541 -260.8L539.4 -259.7L539 -261.3L537.3 -262.5L532.5 -264L527.4 -265.8L526.4 -267.3L526.1 -270.4L526.5 -272.4L528 -275.4L528.5 -277.7L529.8 -279.8L528.1 -280.7L526.1 -280.9L523.1 -281.8L521.8 -282.8L519.9 -282.1L517.6 -283.1L515.2 -282.7L513.7 -283.6L510.5 -283.4L508.8 -283.5L508 -282.5L506.1 -282.2L503.2 -280.2L500.2 -279.7L499 -278.5L496.7 -277.4L493.6 -274.4L491 -272.9L488.8 -269.1L484.6 -266.9L482 -265L481.4 -263.3L480.2 -262.4L477.5 -263.1L476.1 -262.7L474.7 -261L472.3 -259L470.1 -257.4L468.3 -255.2L466.6 -254.1L465.3 -253.6L463.6 -254.6L461.4 -252.9L460.5 -251.4L459.3 -251L458.4 -248.7L455.9 -246.9L453.2 -247.3L450.9 -245.3L449.1 -246.4L447.5 -246L446.6 -243.8L444.9 -243.5L443.8 -241L442.4 -241.8L441.6 -243.4L444.2 -245.1L444.4 -247L447 -250.5L447.3 -253.4L445.9 -256.1L444.6 -257.3L442.7 -254.7L441.5 -255.3L439.5 -254.2L437.3 -255.3L435.2 -255L434 -256.2L434.7 -258L433.9 -259.8L430 -262.2L428.1 -264.4L426.8 -263L425.5 -262.4L424.7 -261.1L426.3 -258.2L425.6 -256.5L425.6 -254L426.5 -253.2L426 -251.8L427 -249.9L424.2 -248.5L422.4 -248.2L420.3 -249.5L416.3 -251.2L413.6 -251.6L411.1 -249.6L412.5 -247.3L410.6 -243.4L411 -241.3L412.3 -242.1L413 -240L414.4 -238.3L413.9 -236.3L411.6 -234.7L410.9 -233.4L410.3 -228.3L412.7 -226.4L413.7 -223.4L414.7 -221.4L415.3 -218.9L414.9 -217.4L415.6 -215.4L410 -213.5L406.1 -212.6L404.2 -211.8L403.1 -213L400.3 -210.4L399.7 -209.3L397.4 -209.6L396.5 -208.5L396.4 -206.3L394.9 -204.4L396 -201.2L394.9 -198.4L394.4 -196.1L392.1 -193.2L392 -191.6L391 -190.4L390.9 -188.8L391.9 -186.9L394.1 -185.1L397.4 -183L398.7 -182.1L398.9 -180.6L399.7 -179.7L399.3 -178.3L400.4 -174.8L400.4 -173.3L401.4 -172.1L402.4 -170L403.3 -169L402.7 -166.6L400.8 -165L397.8 -163.3L397.2 -162.1L395.1 -160.6L393.7 -157.6L391.7 -154.6L389.8 -153.3L388.9 -154.3L388.4 -150.7L388 -148.8L389 -146.9L390.6 -145.6L393.1 -146.5L395.9 -146L398.2 -142.3L397.7 -141L396.4 -138.6L394.8 -133.8L394.8 -130.4L396 -126.7L397.5 -124.3L396 -123.1L394.3 -121.1L392.8 -120L392 -119.1L389.5 -117.6L387.8 -116.9L385.3 -115.7L384.3 -113.8L385.2 -112.7L382.5 -111ZM624.8 -44.4L623.3 -43.2L623.4 -41.3L622.5 -39.6L621.6 -36.2L620.6 -34.1L619.5 -33.3L609.9 -33.3L606.4 -33.3L605.7 -31.1L605.5 -29.6L604 -28.9L602.6 -26.3L603.4 -24.8L604.7 -24.3L604.8 -22L604.6 -19.4L603.7 -18.6L603.2 -16.8L604.3 -14.6L602.9 -13L602 -9.8L603.1 -9.4L604.2 -8.3L605.7 -8.4L607.1 -7.7L607 -5.4L607.7 -3.4L608.2 -0.4L608 2L607.2 4.3L610.6 6L612.8 6.3L614 7.3L615.4 7.9L617.3 8.5L618.6 9.1L620.4 8.4L623.1 9L624.6 10.1L625.9 9.3L627.8 10.4L629.9 9.6L631.7 9.2L633.5 10.7L635.2 12L636.5 12.6L637.8 8L640.4 5.4L641.4 2.2L642.1 1.3L642.3 -0.2L642.8 -3.1L644.2 -5.6L646.3 -6.9L648.1 -8.2L650.8 -8.4L651.3 -9.9L652.7 -11.1L654.1 -14.2L655.3 -15.8L656.6 -15.2L657.5 -16.8L658.6 -19.5L661.4 -26.4L662.5 -28.6L661.9 -30.1L663.1 -30.8L664.7 -31.8L665.3 -32.9L666.3 -37.5L665.6 -39.7L666.8 -40.5L667.8 -43.4L669 -45.3L670.6 -48.7L674 -53.5L676.2 -55.1L680 -56.7L683 -64.3L684.3 -68.6L684.6 -71.2L683.5 -79.9L682.6 -86.7L682.3 -90.8L682.4 -96.3L683.1 -100.3L683.1 -104.2L683.6 -106.6L685.4 -111.8L676.2 -118.5L664.5 -126.8L663.2 -127.2L659.8 -129.2L655.3 -129L653.3 -130.4L649.8 -128.6L649.2 -126.4L647.8 -125.5L646.2 -125L645.4 -125.9L642.7 -127.8L640.2 -126.5L643.6 -121.5L643.7 -119.5L640.9 -119.7L639.6 -121L634.5 -119.4L633.1 -119.1L631.1 -117.1L631.4 -115.3L629 -113.1L629.6 -109L628.2 -107.5L634.2 -106.8L634.1 -103.8L633.1 -99.4L634.8 -98L637.3 -97L637.3 -93.6L638.2 -91.7L636.4 -90.7L634.1 -90.8L630.9 -90.8L629.5 -92.5L626.3 -92.5L625.8 -90.1L626.9 -89.1L628.8 -90L629.9 -88.6L631.1 -86.8L632.6 -86.3L633.8 -84.4L632.3 -82.9L632.7 -81.6L634.6 -80.8L636.4 -78.9L637.3 -76.4L637.5 -74.6L637.1 -72.3L637.9 -71.3L637.4 -69.5L637.7 -67.9L636.3 -66.2L637.1 -64.6L635.5 -62.7L633.5 -62.3L633.6 -60L631.3 -58.6L630.9 -57.1L628.7 -55.8L628.5 -53.9L627.8 -52.7L628.8 -50.1L628.1 -48.4L628 -46.6L626.4 -45.9L625.8 -44.6ZM497.5 80.4L493.5 81.8L492.7 83.3L491.3 86L490.7 87.8L490.5 90.8L488.6 91.8L488 93.5L490.3 95.4L491.9 96.6L492.2 98.2L494.3 99.4L495.1 98.3L497.5 97.9L499.3 99.2L501.7 95.5L499.7 95.4L499.4 93.8L495.4 93.8L494.4 92.5L495.2 91.3L495.2 89.1L495.8 87L497.2 86L499.2 86L501.9 85.1L503.3 84.4L505 84.1L505.7 81.9L507.8 82.3L508.9 80.8L510.2 84.1L512.2 83.9L514 85.6L517.4 85L518.4 83.7L518.8 82L523.5 80.9L525 81.1L526.2 80.5L528 81.1L529.4 80.5L531.3 81.8L533.3 83.6L535.7 84.3L538.7 86.5L540.8 85.5L543.6 84.7L546.7 84.5L550.2 84L553.8 81.9L552.6 79.6L549.1 76L551.3 72.6L553.4 71.8L556.4 70.5L558 71.1L558.5 72.5L557 74.1L557 75.7L555.5 77.9L554.4 79L555.9 80.7L555.3 82.1L558.9 83L562.4 82.9L563.9 82.6L569.7 82.2L573 81.4L575.4 81.2L582.8 81.3L586.6 81.5L594.4 82.1L595.8 82.6L596.5 79.3L598.4 76.6L599.8 76L600.7 74.7L598.2 72.6L597.3 70L597.6 67.1L598 65.6L598.7 64.4L601.4 62.4L604.1 59.5L605.8 58.4L609 54.6L614.5 51.9L618 50.5L625 48.5L626.9 47.8L630 46L632.1 44.4L634.9 42.9L635.8 41.6L635.7 38.3L634.3 32L634.1 30.2L634.5 26.2L632.3 22.1L632.9 20.1L634.3 18.6L635 17L636.5 15.1L636.5 12.6L635.2 12L634.9 10.6L631.7 9.2L629.9 9.6L627.8 10.4L625.9 9.3L624.6 10.1L623.1 9L620.4 8.4L618.6 9.1L617.3 8.5L616.7 7.6L614 7.3L612.8 6.3L610.6 6L607.9 4.4L608 2L608.2 -0.4L607.3 -2.4L607 -5.4L607.1 -7.7L605.7 -8.4L604.2 -8.3L603.1 -9.4L602 -9.8L600.8 -8.5L599.9 -6.6L598.7 -4.9L598 -2.7L595.8 -3L592 -1.7L594 1L592.8 3.1L590.6 5.5L589.9 6.7L589.6 9.3L590.1 10.5L588.6 11.9L588.3 13.4L588.5 15.4L586.7 17.4L586.2 19.3L587.5 20.3L586.4 22.2L584.2 24.5L583.4 27.2L585.8 27.5L586.9 28.5L587.2 30L584.6 31.3L583 31.4L579.9 33L574.3 35.5L572.1 36.7L567.5 39L563.9 40.3L562.9 41.6L559.4 43.4L558.2 44.8L556.6 45.9L554.1 46.4L553.6 45.1L554.5 43.5L553 42.9L551.8 43.6L550.6 42.6L547.1 42.3L542.9 44.5L539.6 45.1L538 45.7L537.1 44.3L536 45.5L535 44.7L534.2 45.6L532.6 45.2L531.8 46L530.1 44.8L527.6 46.2L522.5 48.1L520.4 48.4L517.8 49.3L515.8 51.5L514.5 52.1L511.8 53.3L510.6 52.2L509.6 52.9L508 52.7L505.3 52.6L502.9 54.8L501.1 56L499.2 55.6L496.6 58L494.1 57.2L491.3 58.5L493.1 59.4L494.5 61.5L495.6 63.9L496.4 65.3L497.2 67.4L501 67.5L502.3 68.9L504 67.9L506.3 67.2L507.2 66.1L508 67.7L508.7 66.8L512.4 67.5L514.7 68.8L515.4 70.3L513.1 72.8L511.9 74.2L512.6 75.2L511.5 76.8L509.6 77.5L507.2 78.1L505.6 77.7L504 79.2L502.9 77.6L500.7 79.3L498.7 79.2L497.8 80ZM508.4 93.1L509.9 91.6L512.3 92.4L515.6 91.2L518.1 91.3L516 89.2L514 89L513.5 87.8L512.1 88.1L511 89.7L508.4 93.1ZM534.2 86.2L536.3 86.1L534.2 85.8L532.8 86.2L529.5 86.6L526.1 85.8L525.4 86.9L522.6 85.9L521.2 87.3L522.1 88.3L523.4 87.7L529.5 86.7L534.2 86.2ZM552.8 75.7L551.1 75L549.4 76.1L550.4 77L552.8 75.7ZM419.9 35.2L422.2 32.3L422.8 28.4L424.7 28.5L426.7 23.7L426.3 22.3L426.8 20.5L426.4 18.9L424.2 17.9L422.8 18.1L421.6 15.9L418.1 16.5L417.1 15.1L414.4 15.6L412.6 17.1L410.8 17.9L407.7 17.6L408.4 15L406.6 11.2L405.4 10.1L403.8 7.8L403.2 5.6L403.9 4.4L402.9 3.6L402.6 1.5L402.8 -0.7L401.4 -1.9L399.2 -4.8L399.6 -6L400.1 -7.3L401.1 -9.6L401.2 -11.3L401.8 -12.5L403.5 -12.2L404.4 -13.4L404.6 -15L403.6 -16.3L402.8 -18.2L402.4 -20.2L399.8 -21.4L397.2 -23.1L397.4 -25L397 -27.4L397.8 -29.8L399.4 -32.4L398.3 -35.3L397 -35.9L395.8 -37.2L394.2 -38.4L392.8 -38.6L391.6 -40L392.2 -41.4L390.7 -43.4L387.5 -42.3L385.8 -40.9L384.1 -40L382.7 -41.9L381.3 -42.9L379.4 -42.6L376.1 -42.4L375.2 -41.2L375.7 -40.1L375.4 -38.8L374.2 -36.7L373 -37.4L372.5 -39.5L371.2 -40.5L370.4 -37.7L369.7 -36.8L367.5 -35.8L363.7 -38L362.8 -40.1L361.8 -40.8L360.9 -38.7L362.2 -36.6L360.4 -36L358.5 -37.2L356.3 -36.8L353.4 -36.7L351.9 -36.2L350.1 -36.4L348 -36.3L346 -35L342.9 -35.7L340.9 -35.1L339.4 -35.2L338.1 -34.4L336.9 -30.4L337.3 -28.6L337.2 -27L337.7 -25.2L336.9 -23.7L334 -25.1L333.9 -30.3L333.7 -33.3L333.2 -34.8L331.4 -35.7L328.1 -30.6L325.7 -28.8L324.1 -29.2L322.8 -31.1L321.3 -35L321.1 -37.1L321 -39.5L321.4 -41.3L323.3 -42L321.4 -43.7L319.2 -42.6L315.5 -42.9L314 -44.1L313.2 -45.6L311.8 -46L309.5 -45.4L304.3 -45.2L301.1 -44.8L298.4 -44.6L296 -45.4L293.2 -45.5L290.8 -47.3L288.3 -47.2L286.7 -47.6L282.1 -47.5L279.1 -50.4L277.7 -51L273.6 -49.8L271.6 -47.8L270 -45.9L265.2 -44.6L262.9 -43.4L261.3 -42.4L259.1 -40.8L257 -38.4L256.2 -36.4L254.4 -31.5L252.9 -30.2L251 -29.2L245.9 -28.2L244.1 -27.1L241.2 -22.5L240.1 -21.7L238.1 -18.1L235.6 -16L234.2 -14.2L233 -10.3L233.1 -7.5L233.8 -4.8L233.5 -2.3L231.8 -1.2L230.1 -1.2L228.3 0.9L227.8 2.1L227.2 4.3L225.9 5.3L224.3 5.5L223.8 8.3L225 11.2L224.5 14.1L223 15.9L221.9 19.1L220.7 20.7L219.2 21.7L217.1 21.2L215.4 23.9L216.6 25.1L217.4 27L217.1 28.4L215.3 31.3L213.1 32.4L212.1 35.5L209.9 37.9L207.2 40.8L206.4 44L204.4 46.8L203.8 47.9L202 49.8L200.8 51.1L197.1 52.8L194.5 54.7L193 55.2L189.1 57.9L186.9 60.4L183.4 61.9L181.5 62.7L180.9 63.9L178.7 65.1L177.4 67L178 69.1L180 68L181 67.1L182.5 66L184.3 65.8L186.8 67.5L188.4 67.1L190.3 67.6L192.9 68.3L197 65.8L198.9 67.9L200.4 68.6L202.4 67.5L204.9 68.3L207.9 68.7L209.8 67.8L210.6 69L212.3 69.5L213.5 65.9L214.1 64.1L218 64.6L221.5 65.8L223 67.3L224.7 68.5L227.9 67.8L229.3 68.4L229.9 70.1L233.2 69.6L235.9 71.3L237.5 71L239.1 70.5L240.2 69.4L241.8 70.1L244.4 70L247 70L249 72.4L250.4 73L252.2 73.9L254.9 74.2L256.9 75.3L259.8 75.5L263 76.9L263.7 78.4L264.9 80L264.8 82L268 82L269.1 80.1L270.8 80.1L272 80.8L273 80L274.8 80.6L278.7 81.7L279.1 80.3L281.3 80.5L282 81.8L284.4 81.1L285.6 81.9L289.8 81.5L292.8 80L294.3 80.3L295.4 79.7L296.3 81.1L296.6 83.1L298.6 84L298.2 86.1L299.9 87L301.7 87.2L302.8 88.3L305.2 88.6L305.6 90.2L307 91.3L307.9 92.9L308.9 95.8L309.1 97.9L310.1 99.4L309.9 101.2L310.6 102L310 103.2L309.2 104.7L310 106.5L309.9 108.5L309.2 109.7L309.9 111.4L310.9 112.4L311.9 113.6L311.2 114.9L311.5 117.3L311 118.7L309.7 119.3L310.5 121.3L312.4 123L314 125.7L315.3 128.1L316.4 128.9L317.2 130.5L319.9 131.8L319.4 135.3L321.1 136.6L321.8 138.7L323 139.4L325 140.5L323.1 143L323.2 144.7L321.5 147L322.1 148.5L320.7 149.3L321.2 151.1L320.8 153.9L322.1 155.1L324.8 155.4L325.6 154.3L327.7 154.6L332.3 153.5L334.1 154.3L336 154.3L338.7 153.9L341.1 155.2L343.8 154.6L344.9 155.5L347.1 154.1L348.8 155L350.1 156.5L351.5 157.3L350.8 158.8L349.4 159.9L349 161.6L349 164.5L349 166.8L347.8 168.1L348.5 170.2L349.4 171.5L350.4 172.2L352.3 169.6L354.9 167.2L356.1 167.8L357.2 169.5L359.7 169.6L360.2 167.9L362.6 169.3L362.3 171.2L363.6 173.6L363.5 176.6L366.2 178.5L369.6 177.7L366.8 180.5L368.7 178.9L373.3 174.7L373.9 173L373.9 170.2L376.4 167L380.6 163L384.7 159.6L387 157.8L392.2 154.8L399 150.1L402.8 146.7L405.3 144.8L408.1 143.2L407.6 141.9L408.5 139.7L412.1 136.6L414.1 135.2L419.2 132.1L423.2 129.8L427.4 127.6L430.3 126.7L431.2 125.9L432.6 124.8L434.5 125.7L433.9 127L437 125.6L438.6 125.8L439.8 123.7L441 120L442.7 118.5L444.6 118.3L447.1 117L449.9 116.1L452 115.8L453.9 116.3L458.7 116.7L460.3 117.4L462.9 117.4L464.8 119.3L466.3 118.4L467.6 119L468.9 117.9L467.7 113.8L467.7 111.6L468.5 110.2L470.3 110.2L472.1 108.2L474.6 108.9L475.8 107.8L475.5 106.2L477.8 106.6L477.3 104.8L481.1 104.9L481.8 101.5L484.7 100.8L486 99L487.4 98L490 99.5L493.3 99.4L492.2 98.2L491.9 96.6L490.5 96.2L488 93.5L488.6 91.8L490.5 90.8L491 88.8L491.3 86L491.7 83.2L493.5 81.8L497.5 80.4L498.7 79.2L500.7 79.3L502.9 77.6L504 79.2L505.6 77.7L507.2 78.1L509.6 77.5L511.5 76.8L512.6 75.2L511.9 74.2L513.1 72.8L515.1 71.5L514.7 68.8L512.4 67.5L508.7 66.8L508 67.7L507.2 66.1L506.3 67.2L504 67.9L502.3 68.9L501 67.5L497.2 67.4L497.3 65.3L495.6 63.9L494.5 61.5L493.1 59.4L491 59L489.7 60L488 60.1L486.1 61L485.1 62L481.8 61.8L480 62.6L477.5 64.3L474.2 66.4L473.7 67.7L471.3 67.9L468.7 69.5L467.9 68.1L465.7 66.8L465.4 68.4L464 69.2L461.9 69.4L462.7 68.4L462 67.3L460.5 68.8L458.7 69.4L458.9 67.2L458.2 66.1L456.4 66.7L457.5 69.3L455.8 69.7L454.1 71.1L453.4 73L456.1 72.3L456.9 74.3L454.7 75.8L451.8 77.2L450.9 78.6L449.5 76.8L447.7 77.7L445.7 79.4L444.1 79.7L442.4 79.6L440.8 80.8L440.7 78.5L438.8 78.3L436.3 79.4L433 80L431.8 78.8L431.9 76.4L432.4 75.1L433.5 74.2L431.9 73.4L428.9 72.6L428.2 71.6L431.2 69.8L430 67.2L430.4 65.4L428.8 63.9L425.5 62.8L425.1 60.8L422.7 60.4L420.8 59.4L421.1 57.4L418.7 54.9L419.3 52.8L420.3 51.1L420.6 49.5L422.9 48.3L422.4 46.6L419.6 46L420.9 44.9L420.1 43.6L421.5 42.4L422.7 41.8L421.7 41L420.6 38.3L421.6 37L420.9 35.6ZM472.9 120.5L474.7 118.1L473.9 115.1L471 114.6L470 118L466.4 121.4L467 123.2L472.4 122.2L473.7 124.5L475 123.8L474.9 122.2L472.9 120.5ZM327.7 154.6L325.6 154.3L324.8 155.4L322.1 155.1L320.8 153.9L321.2 151.1L320.7 149.3L322.1 148.5L321.5 147L323.4 145.5L323.1 143L325 140.5L323 139.4L321.8 138.7L321.1 136.6L319.4 135.3L319.9 131.8L317.2 130.5L316.4 128.9L315.3 128.1L314 125.7L312.9 122.5L310.5 121.3L309.7 119.3L311 118.7L311.5 117.3L311.2 114.9L311.9 113.6L310.9 112.4L309.9 111.4L309.2 109.7L309.9 108.5L310 106.5L309.2 104.7L310 103.2L310.6 102L309.9 101.2L310.1 99.4L308.5 98.7L308.9 95.8L307.9 92.9L307 91.3L305.6 90.2L305.2 88.6L302.8 88.3L301.7 87.2L299.9 87L298.2 86.1L298.6 84L296.6 83.1L295.8 82.1L295.4 79.7L294.3 80.3L292.8 80L289.8 81.5L287.1 82L284.4 81.1L282 81.8L281.3 80.5L279.1 80.3L278.7 81.7L274.9 81.3L273 80L272 80.8L270.8 80.1L269.1 80.1L268 82L264.8 82L264.9 80L263.7 78.4L263 76.9L261 75.4L257.8 74.9L254.9 74.2L252.2 73.9L250.4 73L249 72.4L247 70L244.4 70L242.9 69.6L240.2 69.4L239.1 70.5L237.5 71L235.9 71.3L233.3 69.6L229.9 70.1L229.3 68.4L227.9 67.8L224.7 68.5L223.4 67.8L221.5 65.8L218.2 64.7L215.1 63.7L213.5 65.9L213.3 69.1L210.8 70.4L209.8 67.8L208.3 68.4L204.9 68.3L203.3 67.6L200.4 68.6L198.9 67.9L197 65.8L192.9 68.3L190.3 67.6L188.4 67.1L186.8 67.5L184.3 65.8L182.5 66L181 67.1L180 68L178 69.1L176.6 69.4L174.4 72.2L172.4 72.8L169.1 74.1L167.1 75.8L163.1 78.3L160.8 79.4L159.9 81L158.5 82L157.5 84.1L157.4 89.3L155 93.9L154.4 95.9L152.6 99.1L146.2 102.7L144.1 103.6L142.5 110.4L141.7 112.9L140.8 116.1L140.5 117.8L140.5 120.3L139.8 124L138.3 125.5L134.2 128.3L132.8 128.9L131 130.9L130.6 132.6L131.3 134.2L131.4 136.6L133.2 138.2L133.9 140.9L132.5 144L131.3 145.5L130.9 147.3L131.6 150.8L131.3 153.7L131.1 155.2L128.9 158.6L128.7 160.1L127.1 165.5L126.4 169.7L126.3 172.3L127.6 174.4L125.7 176.9L125.1 179.7L123.8 181.9L121.5 184.7L120.2 186.9L120.8 188.3L121.2 192.9L122.7 192.7L123.4 194.1L127.6 195.7L128.6 194.9L128.9 193.2L130.6 193.4L131.2 192L132.4 191.4L133.9 192.9L136 192.4L136.2 190.5L137.5 190.8L138.2 189.9L139.3 188.9L140 189.9L139.1 191.2L141.9 192.6L143.2 191.8L145.1 194.4L148.8 195.7L149.3 197L148.2 197.7L149.4 199.1L150.4 201.6L149.3 203.1L149.9 205.6L149.6 207.2L150.5 209L152.3 211.3L153.7 211.8L153.4 214.9L154.6 215.5L156 217.4L156.8 218.7L157.3 220.5L159.4 220.9L160.4 222.1L162.7 222.7L165.2 221.8L167.2 220.1L169.9 220.9L171.4 222.2L175 224.6L177.9 226.5L180.4 225.5L181.7 224.6L183.8 225.2L187.2 224.5L190.4 224.9L192.8 225L194.9 226L196.7 227.5L198.2 227.1L199.5 226.8L201.7 228.5L204 228L207.7 228.5L208.8 229.4L210.6 229.6L212.2 228.7L213.2 229.6L215 230L216.2 232.1L218.1 233L223 234.3L223.9 235.1L225.9 234.4L227.4 234.7L229.2 234.1L230.9 234.4L232.1 233.7L233.1 234.7L236.8 234.9L238.3 234.7L239.8 236.9L241.5 240.1L242.3 237.9L243.9 237.2L246.3 237.5L248 236.4L248.6 234.9L248.4 233.3L246.7 230.9L247.5 229.4L246 228.2L246.8 226.2L247.5 224.8L249.4 222.5L251.4 221.7L253.2 221.5L254.1 219.7L257.4 219.9L258.1 221L259.2 220.2L260.8 222.2L262.8 221.2L264.6 219.7L266 219.3L266.6 220.4L267.2 218.5L268.3 217.9L269 216.5L270.3 215.6L271.1 212.6L273.9 212.5L275.4 211.1L277.4 211.1L278.6 212.6L280.8 213.3L281 214.7L282.7 215.6L282.3 213.6L284.7 211.8L286.4 212.5L287.7 212.9L289.5 211.1L290.1 212.1L295.1 210.5L297.3 210.8L299.8 211.4L301.5 213.9L304.3 215.2L307.2 218L309.8 219.5L311.9 219.8L313.7 219.2L314.2 218.2L316.4 217.1L318.2 216.6L320.5 214.6L323.8 211.3L326.3 210L329.9 210L331.5 210.2L333.8 209.4L344.7 209.3L347.9 209L349.7 203.8L352.4 198L354 195.3L355.2 193.8L356.9 192.6L360 189.6L358.7 188.7L361.4 187.5L363.2 185.5L364.3 183.8L366.8 181L369.6 177.7L366.2 178.5L363.5 176.6L364.4 174.3L362.3 171.2L362.6 169.3L361.4 167.6L359.7 169.6L357.2 169.5L356.1 167.8L354.9 167.2L352.5 168.5L350.4 172.2L349.4 171.5L348.5 170.2L347.8 168.1L349 166.8L349 164.5L349.7 162.4L349.4 159.9L350.8 158.8L351.5 157.3L350.1 156.5L348.8 155L347.1 154.1L344.9 155.5L343.8 154.6L341.1 155.2L339.8 154.4L336 154.3L334.1 154.3L332.3 153.5L328.4 154.9ZM145.6 460.1L147.7 461.8L149.3 462L149.9 464.3L151 465L153.2 465.3L154 466.1L154.3 468.5L155.9 472L157.1 474.7L157.5 476.9L157.1 478.2L159.4 481L161.7 482.4L163.6 482.2L164.9 485L166.8 486.6L170.5 488.1L172.2 487.5L175.1 489.2L176.6 488.8L178.3 489.6L179.1 488L180.7 487.8L181.5 486.8L182.1 483.2L185.5 481.4L188.9 480.8L190.3 479.9L191.9 478L190.1 476.8L189.4 477.9L188.2 476L189.8 472.6L191.3 470.1L191.6 468.7L193.7 468.9L195.7 468.1L193.4 473.5L193.2 475.4L195.1 478.5L196.5 481.3L197 484.6L195.8 488.8L193.2 493.8L191.6 497.6L190.1 499.5L187.8 500.4L184.9 499.3L182.8 497.4L181.4 495.5L178.8 497L175.9 496.4L175.5 498.1L175.6 502.1L174.8 504.1L171 508.6L168.7 507.5L166.2 510.6L163.7 514.7L165.4 522.4L164.9 525.7L163.8 527.4L162.1 526.8L162.1 529.3L161.3 531.4L161.7 533L164.8 533.1L165.5 535.2L167.5 535.2L171.4 532.2L175.5 528.8L178.2 526.3L189.9 515.9L193.2 511.9L195.7 508.4L200.5 498.4L201.7 495.1L203.3 488.4L204.6 484.1L206.4 479.8L208.2 476.2L210.4 472.9L214.5 469.1L215.5 465.5L213.3 466L214 464L211.9 464.4L215 462.4L212.1 461.2L210.6 463.5L210.1 461.6L212.1 460.4L214 458.6L212.5 458.1L210.9 456.7L210.8 453.1L210.7 451.6L213.5 449.4L215.3 448.8L218.1 449.1L218.7 445.1L218.6 443L218.9 441L219.5 437.4L220.7 434.8L222.3 433.1L224 433L225.1 433.6L226.4 432L228.4 432L230.3 431.2L232.9 431.4L232.8 427.9L233.3 426.4L234.3 425.5L236.7 424.8L240.2 423.8L238.8 421.3L238.1 418.6L238.2 416.5L240.1 414.6L242.3 415L241.8 410.9L241.9 408.1L242.6 405L244.4 404.6L245.1 407.6L245.6 404.6L245.8 401.5L247 398.2L248.6 395.6L251.2 395.4L252.4 394.7L252.2 393.1L250.3 394.2L249.2 392.3L248 391.4L245.9 390.7L245.7 388.1L244.6 387.5L244.8 385.3L245.7 380.3L246.8 379.6L248.2 380L247.2 383.2L248.5 384.1L252.2 388.4L254.1 388.2L256.2 389.9L255.2 394L258 395.1L259.7 396.3L259.4 393.8L260.3 391.7L262.9 391.5L264.7 392.2L265.3 390L266.5 390.5L269.4 390.5L269.9 386.4L272.2 386.2L273.1 388L274.3 388.6L273.8 391.3L274.2 393L273.5 394.3L273.1 398.2L270.3 397.1L270.1 395.5L272.3 394.4L271.5 393.1L270.5 394.6L268.2 392.6L267.3 393.5L268.4 395.8L268.9 399L269.2 403.6L268.8 407.7L267.6 410.7L266.3 412.4L264 413.3L261.5 415.4L260.1 416.1L258.2 415.7L258.9 418.3L258.8 420.1L257.2 422L255.2 422.6L253.1 424.2L250.4 423.4L250.3 425.6L250.9 428.3L251.1 432L250.3 435.3L248.1 439.2L246.4 440.9L243.4 442.3L241.9 441.9L240.9 440.7L239.8 442.2L239.6 443.8L238.2 444.5L236.4 447.3L233.9 450.6L232.1 452.2L229.3 453.1L226.7 453.1L226.4 455.5L224.5 456.5L222.1 456.3L218.9 454.4L216.7 454.3L215.5 455.1L216.3 456.5L218.7 458.7L217.2 461.4L217.8 463.3L217.4 465.2L215.8 467.5L222.2 461.5L225.6 458.6L228.8 456.5L233.4 454L238 451.2L240.9 449.2L246.9 444.3L250 441.2L255.5 435.1L261.6 429.5L263 428L265.8 424.6L269.6 418.4L273.7 412.4L277.3 406.6L280.7 401.6L282.2 399L283.3 396.8L285.3 390.8L286.4 387.9L288.4 382.1L290.3 377L292 373.1L294.2 368.4L297.3 362.3L302.3 354.6L305.7 349.7L304.6 348.5L302.7 348L300.2 345.8L298.6 345L296.4 344.4L294.5 345.5L290.5 347L293.6 350.7L290.6 348.8L289.4 347.3L289.3 344.3L290.8 344.9L294.2 342.8L296.4 338.9L296.1 336.9L297.3 334.6L296.7 331.5L296.3 329.8L296.3 326.4L299.8 323.4L300.9 324L300.9 322L304 319.9L306 320.5L305.9 318.5L304.4 316.5L304.4 314.7L302.7 314.8L301.8 313.7L300.9 314.9L298.6 313.5L295.9 312.5L293.8 313.9L292.2 314.1L289.3 312.9L285.7 312.1L284.5 313.2L283.5 312.5L280.9 311.7L278.8 312.2L277.1 311.4L274.7 311.1L272.4 310L269.7 308.2L268.5 305.3L266.5 304.4L266.1 302.2L264.8 299.8L262.4 299.9L261.7 298L261.8 295.7L259.9 294.5L259.9 292.8L257.9 291.8L256.3 290.7L254.9 289.2L252 285.8L249.9 284.7L246.8 283.6L245.4 282.2L245.1 280.4L243.4 280.5L241.2 279.5L239.8 277.5L238.8 275.7L236.3 275.5L235.2 276.2L234 274.7L233.1 272.5L232.6 273.7L230.5 272.2L229.9 273.5L228.6 272.5L227.3 273.6L225.4 273.9L224.6 272L222.9 272.6L221.7 270L220.4 269.2L219.9 267.8L217.4 266.5L215.2 266.4L214.5 264.7L210.7 265.9L209.1 263.9L207.7 263.2L207.9 265.4L205.9 264.1L204.2 264.3L202.5 262.5L202.9 261.1L201.1 261.9L199 262.9L195.9 263.2L193.7 262.3L193.1 263.9L192.3 262L190.4 262.5L190.5 261L189 260.5L187.3 260.7L187.1 259.2L184.1 260.6L183.1 258.9L182.5 261.1L182 259.2L180.4 258.7L179.9 257.2L180.8 255.9L178.5 256.5L178.7 258.6L176.2 259.4L175 258.1L174.3 260.1L172.7 259.2L169.2 260.8L170.2 257.6L168 256.7L167 256L166.1 257.7L164.2 258.6L162.2 258.4L163 260.1L160.7 259.4L158.8 260L157.6 261L156.8 259.4L155.5 258.9L154.3 259.7L152.1 258.2L150.5 259.4L148.8 257.3L147.5 259.2L145.7 258.4L145.1 260.2L143.3 260.3L142.6 262.7L140.5 264.6L137.8 264.5L136.3 265L135.4 268.2L133.5 269L132.9 270.8L130.7 269L131 271L128.6 269.3L125.8 270.2L126.9 271.3L125.7 272.2L123.8 273.3L122 271.1L120.4 274.4L117.9 274.1L118.2 275.8L116.3 275.7L114 276.3L113.6 274.5L111.9 277.4L111.1 278.4L109.5 278.7L109.5 281.4L107.8 284.7L105.9 285.2L103.7 284.3L102.7 285.5L104.9 287.1L103.9 287.8L102.4 287.4L101.1 288.1L100.6 289.6L99.4 288.2L96.4 290.4L95.3 291.2L93.5 290.9L93 292.6L91.2 293.4L91.6 295.4L90.2 296.3L89.3 297.6L87.4 297.2L85.8 298.9L84.5 300.9L82.8 298.9L81.9 301.5L79.7 303.2L76.7 304.1L77.8 305.8L80.1 307.5L79.7 311.5L78.1 310L72.9 309L71.8 310.7L72.4 314.1L68.5 314.9L67.2 316L67.9 318.3L67.4 319.7L63.5 322.6L60.7 326.6L58.2 326.7L56.7 327.9L56.7 331.6L55.8 332.8L53.7 333.8L52.3 336L51.8 339.3L49 339.7L47.2 340.9L44.7 343.2L43.6 344.4L43.5 346.7L42.9 348.4L41.1 351.4L39.4 351.6L38.6 353.6L37 356.6L33.9 358.4L31.5 361.3L31.3 363L29.4 364.7L25.3 368.3L23.7 368.8L21.3 368.8L19 371.1L17.8 373.3L17.8 376.8L16.9 378.3L15.3 379L13.1 381.4L12.7 382.6L10.4 384.4L7.8 385.5L9.2 387L8.8 388.6L11.3 390.1L14 389.5L16.9 389.9L18.5 388.8L19.5 390.3L22.5 390L23.9 388.4L23.9 386.2L25.9 382.8L27.3 381.8L28.5 382.4L31.9 382.2L35.9 381.7L38.5 383.3L40.5 385.2L41.7 386.6L43.2 386.5L45.5 390.4L47.7 392L49.5 394.7L50.6 394.1L51.4 396.2L53 396.8L53.5 398.8L57.1 400.4L57.6 401.5L59 402.1L59.9 403.6L61.8 405L62.4 407.6L64 408.7L67.1 411L68.4 414.1L67.6 416.3L67.3 421.8L67.8 423.4L72.9 423L75.3 420.7L79.2 418.1L81.6 416.3L80.8 414.6L81.7 413.5L83.9 413.3L85.2 415.4L86.6 415.9L87.8 418.1L89.8 419.4L91.8 421L92.3 422.6L93.5 423.7L93 425.6L94.9 426.1L96.4 428.7L96.5 430.6L99.3 431.3L100.1 432.3L103 433.9L104.5 431.9L105.7 431.3L106.5 433.1L108.4 436.2L109.6 435.8L112 438.6L115.7 437.9L117.1 438.3L118.3 439.1L121.5 439.2L124.2 441.4L125.8 444L126.5 447.4L140.6 459L142.2 457.7L145 458.7L145.6 460.1ZM166.2 -126.3L163.8 -124.5L159.1 -125.6L158.1 -126.9L155.3 -125.7L153.6 -126.2L152.2 -126L149.2 -129.1L147.5 -129.8L145.5 -129.5L145.9 -132.7L146.9 -134.1L147.9 -136.5L149.1 -138.5L151.2 -139.8L152.8 -139.7L154.8 -140.2L155.7 -157.3L154.8 -158.4L152.6 -157.6L151.7 -155.9L150 -153.1L148.6 -152.5L146.2 -149.5L144.7 -148.2L142.8 -148L141.4 -146.4L141.7 -144.4L140.4 -142L138.6 -142L136.4 -142.6L132.2 -140.2L130.7 -140.5L129 -141.5L128.8 -144L127.5 -145.4L125.9 -145.9L124.7 -147.8L122.1 -148.1L119.6 -147.2L115.4 -146.2L115 -144.2L113.4 -143.5L112.5 -142.4L111.1 -141.8L108 -142.4L104.1 -141.1L100.7 -140.7L96.3 -143.1L94.5 -145.3L90.5 -146.5L87.6 -147.9L83.6 -150.6L83.1 -152.6L81.3 -153L78.6 -153.3L77.1 -154.4L72.3 -156L69.5 -157.5L67.6 -158.1L67.4 -160L66.4 -160.8L63.2 -160.5L61.1 -159.8L60 -158.5L58.5 -158.8L55.3 -155.8L53.3 -155.3L51 -154.3L49.2 -155.8L47.2 -154.4L42.6 -153.9L40.7 -155L39.4 -154.3L38.3 -151.7L36.7 -151.6L36.1 -147.8L34.9 -145.6L31.2 -143.6L31.6 -141.9L30.7 -140.3L29 -138.8L28.4 -137.2L26.4 -135.6L21.7 -135.1L20.2 -133.5L18.5 -133.7L17 -132.8L14.1 -132L12.8 -130.2L11.9 -131.8L10.2 -132.8L7.2 -134.5L6.7 -137.1L4.4 -137.9L4.8 -140.1L4.1 -141.7L3.3 -145.2L1.8 -144.3L0.6 -141.3L1.9 -138.8L3.4 -137.4L3.1 -135.5L4.4 -134L3 -133.2L7.5 -124.2L8.5 -120.5L11.1 -117.7L13 -116.2L9.1 -115.9L1.3 -88.2L3 -88.2L3.1 -84.9L3.9 -83.5L0.6 -82.5L-7.6 -63.5L-12.5 -52.1L-2.2 -43.2L-3.9 -40.2L-4.9 -41.1L-6.8 -39.7L-8.5 -39.5L-9.6 -37.5L-11.2 -37.4L-12 -35.8L-12.5 -33.3L-13.8 -32.1L-13 -30.6L-12.1 -31.5L-11 -30L-11.5 -28.5L-10.3 -25.7L-8.5 -25.2L-7.5 -22.9L-8.3 -20.4L-7.5 -18L-8.1 -16.5L-6.4 -14.9L-7.1 -13.2L-5.7 -12.7L-4.3 -13.8L-3 -12L-2.8 -10.5L-5.1 -10.7L-6 -8.5L-3.5 -8.8L-2.2 -7.4L-2.7 -6.1L-4.9 -4.4L-3.3 -3.8L-2.4 -2.2L-1.3 -2.7L-0.7 -0.8L-2.5 1.7L-1.7 4.1L-2.5 5.7L-1.9 7.9L-2 9.5L-4.6 12L-3.6 12.9L-2.1 13.3L-2.3 14.7L-3.5 15.9L-4.8 18.9L-5.1 20.3L-6.1 21.4L-6.1 23.6L-4.3 25L-5.4 26.4L-4.9 27.6L-3.1 28.9L-5.3 30.8L-4.1 32.5L-5 34.6L-6 35.8L-4.4 36.8L-5.6 37.8L-6.6 42.6L-7.8 43.3L-7.1 44.5L-5.4 45.5L-4.9 47.1L-2.4 47.5L-1.3 47L-0.2 48.3L0.8 47.3L2 47.8L4.1 45.7L5.1 46.5L7.1 46.6L8.1 48.1L10.7 49.3L12 50.1L13.4 49.9L15.5 50.6L17.9 52L19 51.3L21.3 52.6L22.2 51.4L26.4 52.4L28.4 51.7L30.4 51.3L32.2 52.8L34.5 52.3L36.1 54.6L37.6 53.9L39.9 52.1L42.2 51.3L43.4 52.8L47 50.2L48.1 48.2L48.4 46.6L50.2 45.4L53.2 45.4L53.9 48L55 49.6L56 51L58.6 52L60 53.6L62.9 54L65.7 53.6L67.7 54.3L70.5 53.8L74 54.1L75.5 57.6L76.9 58.1L78.1 60.5L77.4 61.9L78.5 65.2L82.2 68.4L82.6 71.1L82.4 73.6L81.3 75.2L80.7 77.8L81.2 79.3L81.9 83.7L81.7 85.1L82.7 86L83.3 89L85.4 90.6L86.1 92.3L85.5 94.1L84.8 97.3L86.8 99.9L86.4 101.2L84.7 104.3L85.9 107.8L85.8 110.4L87.9 111.3L89.6 117.2L89.2 118.8L89.4 120.6L89 122.5L90 124.2L92.6 125.7L93.8 124.4L95.9 125.7L97.2 126.6L101 125.3L103.5 125.7L105.9 124.2L108.7 124.3L111.1 122L113.7 120.5L117 120.3L117.8 118.9L121.4 119.2L124.2 121.2L127 122L127.5 123.1L130.3 126.3L131.9 127.9L132.8 128.9L134.2 128.3L137.3 126L139.8 124L140.6 121.4L140.5 117.8L140.8 116.1L141.7 114.3L142.5 110.4L144.1 103.6L145.1 102.6L152.6 99.1L154.4 95.9L155 93.9L157.4 89.3L157.5 84.1L158.5 82L159.9 81L160.8 79.4L163.1 78.3L165.9 76.2L169.1 74.1L172.4 72.8L174.4 72.2L176.6 69.4L177.5 68.1L178.7 65.1L180.9 63.9L181.5 62.7L183.4 61.9L186.9 60.4L189.1 57.9L193 55.2L194.5 54.7L197.1 52.8L200.8 51.1L202 49.8L203.8 47.9L204.4 46.8L206.4 44L207.2 40.8L208.8 38.4L212.1 35.5L213.1 32.4L215.3 31.3L217.1 28.4L217.4 27L216.6 25.1L215.4 23.9L216.3 21.6L219.2 21.7L220.7 20.7L221.9 19.1L223 15.9L224.5 14.1L225 11.2L223.8 8.3L223.8 6.2L225.9 5.3L227.2 4.3L227.8 2.1L228.3 0.9L230.1 -1.2L231.8 -1.2L233.5 -2.3L233.8 -4.8L233.1 -7.5L233.5 -9.4L234.2 -14.2L235.3 -15.8L238.1 -18.1L240.1 -21.7L241.2 -22.5L244.1 -27.1L245.9 -28.2L251 -29.2L252.9 -30.2L254.4 -31.5L256.2 -36.4L257 -38L256.4 -40L256.8 -42.2L256.2 -43.7L257.1 -45.9L256.3 -47.4L256.1 -50.2L256 -52.2L255.6 -54.9L257.5 -59.2L259.9 -59.6L259.7 -61.2L258.4 -63L259.5 -64.4L257.5 -66.8L256.3 -67.8L255.3 -69.6L253.6 -71.1L250.6 -71.9L248.5 -73.1L246.6 -73.1L245.4 -74.9L243.3 -74.7L241.2 -77L238.2 -77.2L236.7 -78L234.7 -78.7L232.1 -78.4L230.9 -79L229.5 -79.5L226.2 -81.7L223.1 -84.2L221.1 -84.8L218.7 -85L217.6 -86.1L215.2 -87.1L213.5 -88.5L212.2 -90.5L207.7 -90.7L206.2 -91.4L203.7 -94.8L202.3 -96.9L200.3 -97.6L199.1 -98.4L197.8 -98.1L197 -97.2L195.2 -97L193.3 -97.5L191 -96.9L188.6 -98L186.2 -98.9L184.7 -99L183.3 -101.8L182.9 -103.3L184.5 -104.6L185.9 -106.4L186.1 -107.9L187.5 -108.2L189.1 -108.6L190.6 -110.7L189.9 -112.2L188.2 -113L186.2 -112.8L183.9 -113.5L180.9 -112.3L178.7 -111.7L177.7 -112.8L177.3 -116.8L176.5 -119.3L176 -122.5L176.8 -123.5L178.6 -123.9L174.9 -124.3L172.5 -125.7L170.4 -126.2L167 -125.6Z" fill="#fff" stroke="#9CC9D8" stroke-width="1.5" stroke-linejoin="round"/>
+      <path d="M202.5 228.4L199.5 226.8L198.2 227.1L196.7 227.5L194.9 226L193.5 224.8L191.4 224.4L187.2 224.5L184.9 225.1L181.7 224.6L180.4 225.5L177.9 226.5L175.4 224.7L171.4 222.2L170.7 220.3L168.5 220.5L165.2 221.8L162.7 222.7L160.4 222.1L159.4 220.9L157.3 220.5L155.5 224.1L154.7 226.6L155.4 228L154.2 232.6L153.8 235.2L154.1 237.6L153.5 241.2L154.3 242.9L155.8 245.4L155.9 247.5L156 249.6L154.5 250.6L153.7 252.2L153.2 253.3L151.3 253.7L150.9 256.7L151.2 258.2L149.8 259.1L152.1 258.2L153 259.9L155.5 258.9L156.8 259.4L157.6 261L158.8 260L160.7 259.4L161.9 260.5L162.2 258.4L163.4 257.8L166.1 257.7L167 256L168 256.7L170.2 257.6L169.2 260.8L172.7 259.2L174.3 260.1L175 258.1L176.2 259.4L178.7 258.6L178.5 256.5L179.6 255.5L179.9 257.2L180.4 258.7L181.7 257.9L181.4 260.7L183.1 258.9L184.1 260.6L187.1 259.2L187.3 260.7L189 260.5L190.5 261L190.4 262.5L192.3 262L193.1 263.9L193.7 262.3L195.9 263.2L198.7 262.1L201.1 263.2L202.9 261.1L202.5 262.5L203.4 263.9L205.9 264.1L207.9 265.4L207.7 263.2L209.4 262.8L210.7 265.9L214.5 264.7L215.2 266.4L217.4 266.5L219.9 267.8L220.4 269.2L221.7 270L222.9 272.6L224.6 272L225.4 273.9L227.3 273.6L228.6 272.5L229.9 273.5L230.5 272.2L232.6 273.7L233.1 272.5L234 274.7L235.2 276.2L236.3 275.5L238.8 275.7L239.8 277.5L241.2 279.5L242.8 279.7L245.1 280.4L245.4 282.2L246.7 282.9L249.9 284.7L252 285.8L255 288.5L256.3 290.7L257 292.5L259.9 292.8L259.9 294.5L261.8 295.7L260.8 297.8L262.4 299.9L264.8 299.8L266.1 302.2L266.5 304.4L268.5 305.3L269.7 307.1L272.4 310L274.3 312L277.1 311.4L278.8 312.2L280.9 311.7L282 312.5L284.5 313.2L285.7 312.1L289.3 312.9L291.2 314.3L293.8 313.9L295.9 312.5L298.6 313.5L300.9 314.9L301.8 313.7L302.7 314.8L304.4 314.7L304.4 316.5L305.9 318.5L306.1 320.4L304 319.9L300.9 322L300.9 324L299.8 323.4L296.3 326.4L296.3 329.8L296.7 331.5L296.5 333.9L296.1 336.9L296.4 338.9L294.2 342.8L290.8 344.9L289.3 344.3L289.4 347.3L290.6 348.8L293.3 350.9L290.5 347L294.5 345.5L296.4 344.4L298.6 345L300.2 345.8L301.8 348L304.6 348.5L305.7 349.7L308.3 346L313.1 340L318.4 334.2L321.7 331.1L325.5 327.7L333.6 322.2L338 319.9L342.2 315.2L341.5 313.3L342.2 311.9L342.6 309.9L343.7 308.3L344.9 304.8L346 303.9L345.2 303L345.6 301L346.5 298.7L347.7 295.4L346.5 294L347 291.7L348.3 290L347.9 287.7L349.9 286.8L350.2 285.4L352.4 284L351.3 283.3L352.8 279.4L354.7 276.7L354.2 275.3L355.1 273.3L356.3 271.8L354.7 268L352.2 267.9L350.5 269.1L350 265.4L348 265.3L347.2 263.4L347.7 261.2L349.9 259.7L352.2 258.4L351 257.5L349.5 258.6L348.3 258.1L347.2 256.2L348.2 254.6L348.9 252.4L347.2 252.2L346.7 250.3L346.2 248.3L347 244.7L345.4 242.4L344.7 240.2L344.4 238.2L345.3 234.4L345.8 233L348 229L349.8 223L351.4 220L350.6 218.8L350.3 216.8L348.9 217L347.8 215.4L347.5 210.8L347.9 209L344.7 209.3L334.1 209.2L331.9 210.7L329.9 210L326.3 210L323.8 211.3L321.3 214.7L319 215.8L316.4 217.1L314.3 217.8L313.7 219.2L311.9 219.8L309.8 219.5L307.9 217.8L304.3 215.2L301.5 213.9L300 212.3L297.3 210.8L295.1 210.5L290.1 212.1L289.5 211.1L287.7 212.9L286.4 212.5L285.5 211.3L282.3 213.6L282.7 215.6L281 214.7L280.8 213.3L278.6 212.6L277.4 211.1L275.4 211.1L274 211.6L272.4 213L270 214.2L269 216.5L268.5 217.6L267.2 218.5L267.8 220.3L266 219.3L264.6 219.7L262.8 221.2L260.8 222.2L260.5 220.5L258.1 221L257.4 219.9L254.9 220.2L253.2 221.5L251.4 221.7L249.4 222.5L247.5 224.8L246.8 226.2L246 228.2L247.5 229.4L246.7 230.9L248.4 233.3L248.6 234.9L248 236.4L246.3 237.5L243.9 237.2L242.3 237.9L241.5 240.1L239.8 236.9L238.3 234.7L236.8 234.9L233.1 234.7L232.1 233.7L230.9 234.4L229.2 234.1L227.4 234.7L225.9 234.4L223.9 235.1L223 234.3L218.9 233.8L216.2 232.1L215 230L213.2 229.6L212.2 228.7L210.6 229.6L208.8 229.4L207.7 228.5L204.9 228.4L202.5 228.4Z" fill="#F5A532" stroke="#0B3C5D" stroke-width="2.5" stroke-linejoin="round"/>
+      <g font-family="Outfit,sans-serif" font-size="19" font-weight="600" fill="#0B3C5D" opacity=".4" text-anchor="middle" letter-spacing="2"><text x="166.3" y="373.8">RS</text><text x="230.6" y="163.8">PR</text><text x="332.6" y="63">SP</text><text x="121" y="37.8">MS</text><text x="472.5" y="29.4">MG</text><text x="563.2" y="60.9">RJ</text></g>
+      <text x="266.5" y="273" font-family="Outfit,sans-serif" font-size="20" font-weight="700" fill="#0B3C5D" letter-spacing="2" text-anchor="middle">SC</text>
+      <text x="610" y="480" font-family="Outfit,sans-serif" font-size="13" font-style="italic" fill="#0B3C5D" opacity=".45" letter-spacing="3" text-anchor="middle">Oceano Atl&#226;ntico</text>
+      <circle class="pulso" cx="344.5" cy="236.5" r="9" fill="#0B3C5D"/>
+      <circle cx="344.5" cy="236.5" r="7" fill="#0B3C5D" stroke="#fff" stroke-width="3"/>
+      <path d="M356 239Q412 240 452 272" fill="none" stroke="#0B3C5D" stroke-width="4" stroke-linecap="round" marker-end="url(#ponta)"/>
+      <text x="470" y="282" font-family="Outfit,sans-serif" font-size="15" font-weight="600" fill="#0B3C5D" letter-spacing="4">ATENDIMENTO EM</text>
+      <text x="468" y="322" font-family="Outfit,sans-serif" font-size="40" font-weight="800" fill="#0B3C5D">BARRA VELHA</text>
+    </svg></div>
+</section>
+
+<!-- ============ PERGUNTAS FREQUENTES ============ -->
+<section class="faq" id="duvidas">
+  <div class="faq-titulo">
+    <span class="rotulo">Dúvidas</span>
+    <h2>Perguntas <em>frequentes</em></h2>
+  </div>
+  <div class="faq-lista">
+  <!-- Para adicionar outra pergunta, copie o bloco <details> inteiro e troque os textos -->
+  <details>
+    <summary>Com que frequência a piscina precisa de limpeza?</summary>
+    <p>Em geral, o recomendado é uma limpeza por semana, e mais vezes no verão ou quando a piscina é muito usada. A frequência certa para a sua piscina a gente define com você, conforme o tamanho e o uso.</p>
+  </details>
+  <details>
+    <summary>O que está incluído em cada visita?</summary>
+    <p>Peneiração da superfície, escovação das paredes e bordas, aspiração do fundo, limpeza do filtro, análise e ajuste do pH e cloro na medida certa.</p>
+  </details>
+  <details>
+    <summary>Os produtos estão incluídos ou ficam por conta do cliente?</summary>
+    <p>Isso é combinado antes do primeiro atendimento. Chame no <a data-zap href="#" target="_blank" rel="noopener">WhatsApp</a>, informe o tamanho da piscina e explicamos como funciona.</p>
+  </details>
+  <details>
+    <summary>Vocês recuperam piscina verde ou parada há muito tempo?</summary>
+    <p>Sim. Veja exemplos na seção <a href="#antes-depois">Antes e depois</a>. O tempo de recuperação depende do estado da água; mande uma foto pelo <a data-zap href="#" target="_blank" rel="noopener">WhatsApp</a> para avaliarmos.</p>
+  </details>
+  <details>
+    <summary>Preciso estar em casa na hora da visita?</summary>
+    <p>O acesso à piscina é combinado com você antes de cada visita. Fale com a gente pelo <a data-zap href="#" target="_blank" rel="noopener">WhatsApp</a> para acertarmos a melhor forma.</p>
+  </details>
+  <details>
+    <summary>Cuidam da piscina de casa de temporada, com o dono fora?</summary>
+    <p>Conte pelo <a data-zap href="#" target="_blank" rel="noopener">WhatsApp</a> como é o uso da casa e com que frequência você vem a Barra Velha, e avaliamos o seu caso.</p>
+  </details>
+  </div>
+</section>
+
+<a class="zap-flut" data-zap href="#" target="_blank" rel="noopener" aria-label="Conversar no WhatsApp" title="WhatsApp"><svg><use href="#zap"/></svg></a>
+
+<!-- ============ 4. RODAPÉ ============ -->
+<footer>
+  <svg class="logo" role="img" aria-label="Logo O Piscineiro"><use href="#logo"/></svg>
+  <p class="nome">O Piscineiro</p>
+  <p class="lema">Garantindo o seu lazer · Barra Velha, SC</p>
+  <p class="contato"><a href="mailto:opiscineirobarravelha@gmail.com">opiscineirobarravelha@gmail.com</a></p>
+  <div class="redes">
+    <!-- Troque os "#" pelos links das suas redes -->
+    <a href="https://www.instagram.com/opiscineirobarravelha/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a data-zap href="#" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp"><svg><use href="#zap"/></svg></a>
+    <a href="mailto:opiscineirobarravelha@gmail.com" aria-label="E-mail" title="E-mail">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.500 6.500L20.500 7"/></svg>
+    </a>
+    <a href="#" aria-label="Facebook" title="Facebook">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.6 21v-7.6h2.5l.4-3h-2.9V8.5c0-.9.3-1.5 1.6-1.5h1.5V4.3c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2.4H8.3v3h2.5V21z"/></svg>
+    </a>
+  </div>
+  <p class="fim">© <span id="ano"></span> O Piscineiro</p>
+</footer>
+
+<script>
+/* ---------- Ilustração de piscina (substituível por fotos reais) ---------- */
+let uid = 0;
+function cena(o){
+  const W=o.w||400, H=o.h||667, id=++uid, hz=H*.4, k=W/400;
+  const x1=W*.16, x2=W*.84, x3=W*.99, x4=W*.01, y1=H*.56, y2=H*.98;
+  const pts=[[.3,.66],[.56,.72],[.22,.83],[.62,.88],[.44,.61],[.4,.93]];
+  let agua='';
+  pts.slice(0,o.sujo?2:6).forEach(([fx,fy])=>{
+    agua+=`<path d="M${W*fx} ${H*fy}q${12*k} ${-8*k} ${24*k} 0t${24*k} 0t${24*k} 0" fill="none" stroke="#fff" stroke-width="${3*k}" stroke-linecap="round" opacity="${o.sujo?.18:.6}"/>`;
+  });
+  if(o.sujo){
+    [[.34,.7,60,16],[.6,.8,80,20],[.25,.9,70,16],[.66,.64,44,11],[.5,.92,90,14]].forEach(([fx,fy,rx,ry])=>{
+      agua+=`<ellipse cx="${W*fx}" cy="${H*fy}" rx="${rx*k}" ry="${ry*k}" fill="${o.mancha}" opacity=".55"/>`;
+    });
+    [[.3,.64,20,'#8a6a2b'],[.52,.7,-30,'#5d7a2a'],[.7,.86,50,'#8a6a2b'],[.2,.86,-10,'#6b5a22'],[.45,.84,70,'#5d7a2a'],[.62,.6,10,'#8a6a2b']]
+      .slice(0,o.folhas??6).forEach(([fx,fy,r,c])=>{
+      agua+=`<path d="M0 0q${7*k} ${-9*k} ${18*k} 0q${-11*k} ${9*k} ${-18*k} 0z" fill="${c}" transform="translate(${W*fx} ${H*fy}) rotate(${r})"/>`;
+    });
+  }
+  const vara=o.vara?`<line x1="${W*.97}" y1="${H*.1}" x2="${W*.63}" y2="${H*.69}" stroke="#E8ECEF" stroke-width="${5*k}" stroke-linecap="round"/>
+    <ellipse cx="${W*.6}" cy="${H*.71}" rx="${30*k}" ry="${13*k}" fill="rgba(255,255,255,.3)" stroke="#0B3C5D" stroke-width="${4*k}"/>`:'';
+  return `<svg viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="c${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${o.ceu[0]}"/><stop offset="1" stop-color="${o.ceu[1]}"/></linearGradient>
+    <linearGradient id="a${id}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${o.agua[0]}"/><stop offset="1" stop-color="${o.agua[1]}"/></linearGradient>
+  </defs>
+  <rect width="${W}" height="${H}" fill="url(#c${id})"/>
+  <circle cx="${W*(o.sol||.75)}" cy="${H*.13}" r="${26*k}" fill="#F5A532" opacity="${o.sujo?.55:1}"/>
+  <g fill="${o.planta||'#3E8E4F'}">
+    <circle cx="${W*.06}" cy="${hz-H*.1}" r="${46*k}"/><circle cx="${W*.2}" cy="${hz-H*.08}" r="${34*k}"/>
+    <circle cx="${W*.9}" cy="${hz-H*.11}" r="${50*k}"/><circle cx="${W*.76}" cy="${hz-H*.07}" r="${28*k}"/>
+  </g>
+  <rect y="${hz-H*.07}" width="${W}" height="${H*.13}" fill="${o.muro||'#F3EDE2'}"/>
+  <rect y="${hz+H*.06}" width="${W}" height="${H}" fill="${o.piso}"/>
+  <path d="M${x1} ${y1}H${x2}L${x3} ${y2}H${x4}Z" fill="url(#a${id})" stroke="#fff" stroke-width="${9*k}" stroke-linejoin="round"/>
+  ${agua}${vara}
+  </svg>`;
+}
+
+const LIMPA  = ['#5FD6EC','#19B5D6'];
+const CEU_OK = ['#8FD3F2','#DDF3FB'];
+const CEU_RUIM = ['#9FB3B8','#D9DFDA'];
+
+/* Abertura: três cenas que se alternam sozinhas */
+const heroCenas = {
+  h1:{w:1600,h:900,ceu:CEU_RUIM,agua:['#6F8F3E','#40622C'],mancha:'#2F4A1E',piso:'#CFC4B0',sujo:true,vara:true},
+  h2:{w:1600,h:900,ceu:['#A9CFE0','#E2EEF0'],agua:['#63B7A6','#2E8F8C'],mancha:'#2C7468',piso:'#D9CDB8',sujo:true,folhas:2,vara:true,sol:.3},
+  h3:{w:1600,h:900,ceu:CEU_OK,agua:LIMPA,piso:'#E6DAC6',sol:.6}
+};
+document.querySelectorAll('.slide[data-cena]').forEach(s=>s.innerHTML=cena(heroCenas[s.dataset.cena]));
+const slides=[...document.querySelectorAll('.slide')], pontos=[...document.querySelectorAll('.pontos i')];
+let atual=0;
+/* Troca de foto: 3 s no computador, 2,5 s no celular */
+const celular=matchMedia('(max-width:820px)');
+(function trocar(){
+  setTimeout(()=>{
+    slides[atual].classList.remove('on'); pontos[atual].classList.remove('on');
+    atual=(atual+1)%slides.length;
+    slides[atual].classList.add('on'); pontos[atual].classList.add('on');
+    trocar();
+  }, celular.matches ? 2500 : 3000);
+})();
+
+/* Antes e depois.
+   Para usar fotos reais, adicione  antesFoto:'fotos/1-antes.jpg', depoisFoto:'fotos/1-depois.jpg'  em cada item. */
+const trabalhos = [
+  {nome:'Piscina 01', obs:'Água verde → cristalina',      agua:['#6F8F3E','#3E5F2A'], mancha:'#2F4A1E', piso:'#D9CDB8'},
+  {nome:'Piscina 02', obs:'Água turva → transparente',    agua:['#9DB3A6','#6F8F86'], mancha:'#5E7A70', piso:'#C9A27A', folhas:2},
+  {nome:'Piscina 03', obs:'Folhas e sujeira removidas',   agua:['#5FA89A','#2F7F7A'], mancha:'#2C6A5E', piso:'#E3DCD0'},
+  {nome:'Piscina 04', obs:'Algas no fundo → fundo limpo', agua:['#4F7A3A','#2C4A22'], mancha:'#1E3516', piso:'#BFB6A6', folhas:3},
+  {nome:'Piscina 05', obs:'Água barrenta → azul',         agua:['#A08A55','#6F5E38'], mancha:'#5A4A28', piso:'#D6C7AE', folhas:4}
+];
+const trilho=document.getElementById('trilho');
+trabalhos.forEach((t,i)=>{
+  const sol=.25+(i%3)*.25;
+  const foto=src=>`<img src="${src}" alt="" style="width:100%;height:100%;object-fit:cover">`;
+  const antes = t.antesFoto ? foto(t.antesFoto) : cena({...t,ceu:CEU_RUIM,sujo:true,sol,planta:'#5C7F4C'});
+  const depois= t.depoisFoto? foto(t.depoisFoto): cena({ceu:CEU_OK,agua:LIMPA,piso:t.piso,sol});
+  const c=document.createElement('article');
+  c.className='cartao';
+  c.innerHTML=`<div class="img">${depois}</div><div class="img antes">${antes}</div>
+    <div class="divisor"></div><span class="etq a">Antes</span><span class="etq d">Depois</span>
+    <div class="legenda"><strong>${t.nome}</strong><small>${t.obs}</small></div>
+    <input type="range" min="0" max="100" value="50" aria-label="Comparar antes e depois — ${t.nome}">`;
+  c.querySelector('input').addEventListener('input',e=>c.style.setProperty('--p',e.target.value+'%'));
+  trilho.appendChild(c);
+});
+const passo=()=>trilho.querySelector('.cartao').offsetWidth+20;
+const irPara=d=>{
+  const c=[...trilho.children], max=trilho.scrollWidth-trilho.clientWidth;
+  const i=Math.max(0,Math.min(c.length-1,Math.round(trilho.scrollLeft/passo())+d));
+  trilho.scrollTo({left:Math.min(max,c[i].offsetLeft-c[0].offsetLeft),behavior:'smooth'});
+};
+document.querySelector('.seta.esq').onclick=()=>irPara(-1);
+document.querySelector('.seta.dir').onclick=()=>irPara(1);
+
+/* Cabeçalho e animações de entrada */
+const topo=document.getElementById('topo');
+/* WhatsApp: coloque o número com 55 + DDD, só dígitos. Exemplo: '5547999990000' */
+const WHATSAPP = '5547999310385';
+const zapMsg = encodeURIComponent('Olá! Vi o site de O Piscineiro e gostaria de falar sobre a minha piscina.');
+document.querySelectorAll('[data-zap]').forEach(a=>a.href='https://wa.me/'+WHATSAPP+'?text='+zapMsg);
+
+/* Faixa amarela: repete o conteúdo para nunca faltar texto em telas largas */
+const faixa=document.querySelector('.faixa div');
+faixa.innerHTML+=faixa.innerHTML;
+
+/* Menu do celular */
+const menu=document.getElementById('menu'), menuBtn=document.getElementById('menuBtn');
+menuBtn.onclick=()=>menuBtn.setAttribute('aria-expanded',menu.classList.toggle('aberto'));
+menu.querySelectorAll('a').forEach(a=>a.onclick=()=>{menu.classList.remove('aberto');menuBtn.setAttribute('aria-expanded','false')});
+
+const subir=document.getElementById('subir');
+subir.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+addEventListener('scroll',()=>{topo.classList.toggle('rolou',scrollY>40);subir.classList.toggle('on',scrollY>innerHeight)},{passive:true});
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visto');obs.unobserve(e.target)}}),{threshold:.2});
+document.querySelectorAll('.surge').forEach(el=>obs.observe(el));
+document.getElementById('ano').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>

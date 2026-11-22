@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200" viewBox="0 0 300 300">
+<g id="fundo-circulo">
+<circle cx="150" cy="150" r="146" fill="#0B3C5D"/>
+</g>
+<g id="sol">
+<line x1="150.0" y1="92.0" x2="150.0" y2="78.0" stroke="#F5A532" stroke-width="7" stroke-linecap="round"/>
+<line x1="180.4" y1="104.6" x2="190.3" y2="94.7" stroke="#F5A532" stroke-width="7" stroke-linecap="round"/>
+<line x1="193.0" y1="135.0" x2="207.0" y2="135.0" stroke="#F5A532" stroke-width="7" stroke-linecap="round"/>
+<line x1="119.6" y1="104.6" x2="109.7" y2="94.7" stroke="#F5A532" stroke-width="7" stroke-linecap="round"/>
+<line x1="107.0" y1="135.0" x2="93.0" y2="135.0" stroke="#F5A532" stroke-width="7" stroke-linecap="round"/>
+<circle cx="150" cy="135" r="32" fill="#F5A532"/>
+</g>
+<g id="mar-cobre-sol">
+<path d="M80 166 q17.5 -12 35 0 t35 0 t35 0 t35 0 V232 H80 Z" fill="#0B3C5D"/>
+</g>
+<g id="onda-1">
+<path d="M84 168 q16.5 -12 33 0 t33 0 t33 0 t33 0" fill="none" stroke="#19B5D6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="onda-2">
+<path d="M100 192 q16.7 -11 33.3 0 t33.3 0 t33.3 0" fill="none" stroke="#19B5D6" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" opacity="0.7"/>
+</g>
+<g id="anel">
+<circle cx="150" cy="150" r="102" fill="none" stroke="#F5A532" stroke-width="3"/>
+</g>
+<g id="texto-circular">
+<text x="67.8" y="59.8" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(-42.4 67.8 59.8)">A</text>
+<text x="85.8" y="46.3" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(-31.8 85.8 46.3)">Q</text>
+<text x="105.9" y="36.2" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(-21.2 105.9 36.2)">U</text>
+<text x="127.6" y="30.1" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(-10.6 127.6 30.1)">A</text>
+<text x="150.0" y="28.0" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(0.0 150.0 28.0)">C</text>
+<text x="172.4" y="30.1" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(10.6 172.4 30.1)">L</text>
+<text x="194.1" y="36.2" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(21.2 194.1 36.2)">A</text>
+<text x="214.2" y="46.3" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(31.8 214.2 46.3)">R</text>
+<text x="232.2" y="59.8" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(42.4 232.2 59.8)">A</text>
+<text x="259.2" y="95.6" font-family="Outfit" font-weight="600" font-size="19" fill="#F5A532" text-anchor="middle" dominant-baseline="central" transform="rotate(63.5 259.2 95.6)">★</text>
+<text x="271.5" y="138.7" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(84.7 271.5 138.7)">L</text>
+<text x="271.5" y="161.3" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(95.3 271.5 161.3)">I</text>
+<text x="267.3" y="183.4" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(105.9 267.3 183.4)">M</text>
+<text x="259.2" y="204.4" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(116.5 259.2 204.4)">P</text>
+<text x="247.4" y="223.5" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(127.1 247.4 223.5)">E</text>
+<text x="232.2" y="240.2" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(137.6 232.2 240.2)">Z</text>
+<text x="214.2" y="253.7" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(148.2 214.2 253.7)">A</text>
+<text x="172.4" y="269.9" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(169.4 172.4 269.9)">D</text>
+<text x="150.0" y="272.0" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(180.0 150.0 272.0)">E</text>
+<text x="105.9" y="263.8" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(201.2 105.9 263.8)">P</text>
+<text x="85.8" y="253.7" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(211.8 85.8 253.7)">I</text>
+<text x="67.8" y="240.2" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(222.4 67.8 240.2)">S</text>
+<text x="52.6" y="223.5" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(232.9 52.6 223.5)">C</text>
+<text x="40.8" y="204.4" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(243.5 40.8 204.4)">I</text>
+<text x="32.7" y="183.4" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(254.1 32.7 183.4)">N</text>
+<text x="28.5" y="161.3" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(264.7 28.5 161.3)">A</text>
+<text x="28.5" y="138.7" font-family="Outfit" font-weight="600" font-size="19" fill="#FFFFFF" text-anchor="middle" dominant-baseline="central" transform="rotate(275.3 28.5 138.7)">S</text>
+<text x="40.8" y="95.6" font-family="Outfit" font-weight="600" font-size="19" fill="#F5A532" text-anchor="middle" dominant-baseline="central" transform="rotate(296.5 40.8 95.6)">★</text>
+</g>
+</svg>
