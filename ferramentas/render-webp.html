@@ -1,0 +1,30 @@
+<!doctype html>
+<!-- Converte as fotos para WebP no navegador; ferramentas/imagens.ps1 lê o resultado e salva os arquivos -->
+<meta charset="utf-8">
+<body>
+<img data-max="1920" src="../fotos/abertura-1.jpg">
+<img data-max="1920" src="../fotos/abertura-2.jpg">
+<img data-max="1920" src="../fotos/abertura-3.jpg">
+<img data-max="1200" src="../fotos/servico-ph.jpg">
+<img data-max="1200" src="../fotos/servico-cloro.jpg">
+<img data-max="1200" src="../fotos/servico-limpeza.jpg">
+<script>
+/* Tudo síncrono no "load", para o Edge sem janela (--dump-dom) já pegar o resultado */
+addEventListener('load', () => {
+  for (const img of [...document.images]) {
+    const nome = img.getAttribute('src').split('/').pop().replace('.jpg', '');
+    const k = Math.min(1, +img.dataset.max / img.naturalWidth);
+    const c = document.createElement('canvas');
+    c.width = Math.round(img.naturalWidth * k);
+    c.height = Math.round(img.naturalHeight * k);
+    const g = c.getContext('2d');
+    g.imageSmoothingQuality = 'high';
+    g.drawImage(img, 0, 0, c.width, c.height);
+    const pre = document.createElement('pre');
+    pre.dataset.nome = nome;
+    pre.textContent = c.toDataURL('image/webp', 0.8);
+    document.body.appendChild(pre);
+    img.remove();
+  }
+});
+</script>

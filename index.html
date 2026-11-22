@@ -6,13 +6,14 @@
 <title>O Piscineiro — Garantindo o seu lazer</title>
 <meta name="description" content="O Piscineiro: limpeza e tratamento de piscinas. Veja o antes e depois do nosso trabalho.">
 <link rel="icon" type="image/svg+xml" href="icone.svg">
-<link rel="apple-touch-icon" href="icone.svg">
-<!-- Prévia ao compartilhar o link. Depois de publicar, troque og:image pelo endereço completo, ex.: https://seusite.com.br/fotos/compartilhar.jpg -->
+<link rel="apple-touch-icon" href="icone-180.png">
+<!-- Prévia ao compartilhar o link (WhatsApp, Instagram, Facebook). Se o endereço do site mudar (ex.: domínio próprio), troque o início de og:url e og:image -->
 <meta property="og:type" content="website">
 <meta property="og:locale" content="pt_BR">
 <meta property="og:title" content="O Piscineiro — Garantindo o seu lazer">
 <meta property="og:description" content="Limpeza e tratamento de piscinas em Barra Velha, SC. Veja o antes e depois do nosso trabalho.">
-<meta property="og:image" content="fotos/compartilhar.jpg">
+<meta property="og:url" content="https://opiscineiro.pages.dev/">
+<meta property="og:image" content="https://opiscineiro.pages.dev/fotos/compartilhar.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
@@ -220,6 +221,9 @@ footer .fim{margin-top:16px;font-size:.75rem}
 .hero p{font-size:clamp(.75rem,1.15vw,1rem);margin-top:12px}
 .pontos{margin-top:24px}
 .marca span{letter-spacing:.16em;font-size:1.15rem}
+footer .nome,footer .nome b{font-family:'Poppins',Arial,sans-serif;font-style:italic;font-weight:800}
+footer .nome{color:var(--sun);letter-spacing:.16em;font-size:1.05rem}
+footer .nome b{color:#fff}
 
 /* ---------- Perguntas frequentes ---------- */
 .faq{background:var(--foam);color:var(--ink);display:grid;grid-template-columns:minmax(220px,1fr) 2.2fr;
@@ -418,9 +422,9 @@ section{scroll-margin-top:62px}
 <section class="hero" id="inicio">
   <!-- Para usar fotos reais: troque o conteúdo de cada .slide por <img src="fotos/hero1.jpg" style="width:100%;height:100%;object-fit:cover"> -->
   <!-- Fotos de uso livre do Unsplash (unsplash.com/license) -->
-  <div class="slide on"><img src="fotos/abertura-1.jpg" alt="Profissional limpando uma piscina"></div>
-  <div class="slide"><img src="fotos/abertura-2.jpg" alt="Limpador robótico no fundo de uma piscina"></div>
-  <div class="slide"><img src="fotos/abertura-3.jpg" alt="Piscina limpa com pátio e flores"></div>
+  <div class="slide on"><img src="fotos/abertura-1.webp" alt="Profissional limpando uma piscina"></div>
+  <div class="slide"><img src="fotos/abertura-2.webp" alt="Limpador robótico no fundo de uma piscina"></div>
+  <div class="slide"><img src="fotos/abertura-3.webp" alt="Piscina limpa com pátio e flores"></div>
   <h1><em>O</em> Piscineiro</h1>
   <p>“Garantindo o seu lazer”</p>
   <div class="pontos"><i class="on"></i><i></i><i></i></div>
@@ -448,7 +452,7 @@ section{scroll-margin-top:62px}
 <!-- ============ 3. SERVIÇOS ============ -->
 <section class="servico" id="ph">
   <div class="arte">
-    <img src="fotos/servico-ph.jpg" alt="Mão segurando dois tubos de teste com líquido azul e amarelo" style="object-position:50% 48%" loading="lazy"><span class="selo">pH ideal: 7,2 – 7,6</span>
+    <img src="fotos/servico-ph.webp" alt="Mão segurando dois tubos de teste com líquido azul e amarelo" style="object-position:50% 48%" loading="lazy"><span class="selo">pH ideal: 7,2 – 7,6</span>
   </div>
   <div class="txt surge">
     <h2>Análise e ajuste de pH</h2>
@@ -459,7 +463,7 @@ section{scroll-margin-top:62px}
 
 <section class="servico inv" id="cloro">
   <div class="arte">
-    <img src="fotos/servico-cloro.jpg" alt="Água cristalina sobre os azulejos de uma piscina" loading="lazy"><span class="selo">Cloro livre: 1 – 3 ppm</span>
+    <img src="fotos/servico-cloro.webp" alt="Água cristalina sobre os azulejos de uma piscina" loading="lazy"><span class="selo">Cloro livre: 1 – 3 ppm</span>
   </div>
   <div class="txt surge">
     <h2>Cloro na medida certa</h2>
@@ -470,7 +474,7 @@ section{scroll-margin-top:62px}
 
 <section class="servico" id="limpeza">
   <div class="arte">
-    <img src="fotos/servico-limpeza.jpg" alt="Ferramentas de limpeza de piscina sobre um deck" loading="lazy">
+    <img src="fotos/servico-limpeza.webp" alt="Ferramentas de limpeza de piscina sobre um deck" loading="lazy">
   </div>
   <div class="txt surge">
     <h2>Limpeza especializada</h2>
@@ -543,11 +547,10 @@ section{scroll-margin-top:62px}
 <!-- ============ 4. RODAPÉ ============ -->
 <footer>
   <svg class="logo" role="img" aria-label="Logo O Piscineiro"><use href="#logo"/></svg>
-  <p class="nome">O Piscineiro</p>
+  <p class="nome"><b>O</b> Piscineiro</p>
   <p class="lema">Garantindo o seu lazer · Barra Velha, SC</p>
   <p class="contato"><a href="mailto:opiscineirobarravelha@gmail.com">opiscineirobarravelha@gmail.com</a></p>
   <div class="redes">
-    <!-- Troque os "#" pelos links das suas redes -->
     <a href="https://www.instagram.com/opiscineirobarravelha/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.3" cy="6.7" r="1" fill="currentColor" stroke="none"/></svg>
     </a>
@@ -555,7 +558,7 @@ section{scroll-margin-top:62px}
     <a href="mailto:opiscineirobarravelha@gmail.com" aria-label="E-mail" title="E-mail">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 7l8.500 6.500L20.500 7"/></svg>
     </a>
-    <a href="#" aria-label="Facebook" title="Facebook">
+    <a href="https://www.facebook.com/opiscineirobarravelha/" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
       <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.6 21v-7.6h2.5l.4-3h-2.9V8.5c0-.9.3-1.5 1.6-1.5h1.5V4.3c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2.4H8.3v3h2.5V21z"/></svg>
     </a>
   </div>

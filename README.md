@@ -18,4 +18,5 @@ e acesse http://localhost:8765.
 
 - `serve.ps1` — servidor local simples.
 - `mapa.ps1` — gera o mapa de Santa Catarina a partir das malhas do IBGE.
-- `fotos.ps1` — baixa as fotos (Unsplash/Pexels, licença livre) e gera `fotos/compartilhar.jpg`.
+- `fotos.ps1` — baixa as fotos originais em JPG (Unsplash/Pexels, licença livre).
+- `imagens.ps1` — com o servidor local ligado, usa o Edge sem janela para gerar `icone-180.png` (ícone do iPhone), `fotos/compartilhar.jpg` (prévia do link) e as fotos em WebP usadas no site, a partir dos moldes `render-*.html`.
