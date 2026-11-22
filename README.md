@@ -20,4 +20,5 @@ e acesse http://localhost:8765.
 - `mapa.ps1` — gera o mapa de Santa Catarina a partir das malhas do IBGE.
 - `fotos.ps1` — baixa as fotos originais em JPG (Unsplash/Pexels, licença livre).
 - `antes-depois.ps1` — gera as fotos da seção "Antes e depois" (`fotos/antes-depois/`) a partir de fotos reais de piscinas limpas (Pexels, licença livre); a versão "antes" é uma edição feita só na água (`render-antes-depois.html`).
+- `trabalhos.ps1` — gera as fotos da seção "Trabalhos realizados" (`fotos/trabalhos/`) a partir das fotos reais em `fotos/trabalhos/originais`; o enquadramento e os ajustes de cor de cada foto ficam em `render-trabalhos.html`.
 - `imagens.ps1` — com o servidor local ligado, usa o Edge sem janela para gerar `icone-180.png` (ícone do iPhone), `fotos/compartilhar.jpg` (prévia do link) e as fotos em WebP usadas no site, a partir dos moldes `render-*.html`.

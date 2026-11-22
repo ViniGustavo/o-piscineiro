@@ -1,0 +1,41 @@
+<!doctype html>
+<!-- Enquadra e ajusta as fotos da seção "Trabalhos realizados" (fotos/trabalhos/originais -> fotos/trabalhos/*.webp).
+     Sem parâmetros mostra uma prévia; com ?exportar=1 gera os dados que ferramentas/trabalhos.ps1 salva.
+     corte = [x, y, largura, altura] na foto original (proporção 4:5). As fotos "antes" recebem só correção neutra. -->
+<meta charset="utf-8">
+<style>body{margin:0;background:#222;display:flex;flex-wrap:wrap;gap:8px;padding:8px}canvas{width:240px;height:300px}</style>
+<body>
+<script>
+const fotos = [
+  {nome:'1-verde-antes',   corte:[55, 0, 1024, 1280],  filtro:'contrast(1.03)'},
+  {nome:'1-verde-depois',  corte:[28, 0, 771, 964],    filtro:'contrast(1.06) saturate(1.06)'},
+  {nome:'2-turva-antes',   corte:[84, 0, 1024, 1280],  filtro:'brightness(.97) contrast(1.05)'},
+  {nome:'2-turva-depois',  corte:[266, 0, 748, 935],   filtro:'contrast(1.07) saturate(1.08)'},
+  {nome:'3-folhas-antes',  corte:[0, 395, 738, 922],   filtro:'contrast(1.03)'},
+  {nome:'3-folhas-depois', corte:[0, 372, 738, 922],   filtro:'contrast(1.06) saturate(1.05)'},
+  {nome:'4-azulejo',       corte:[0, 228, 738, 922],   filtro:'brightness(.98) contrast(1.06) saturate(1.05)'},
+  {nome:'5-sombra',        corte:[0, 280, 680, 850],   filtro:'brightness(1.06) contrast(1.05) saturate(1.04)'},
+  {nome:'6-fibra',         corte:[0, 280, 738, 922],   filtro:'brightness(1.02) contrast(1.08) saturate(1.1)'}
+];
+const exportar = location.search.includes('exportar');
+const imgs = fotos.map(f => { const i = new Image(); i.src = `../fotos/trabalhos/originais/${f.nome}.jpg`; document.body.appendChild(i); i.hidden = true; return i; });
+/* Tudo síncrono no "load", para o Edge sem janela (--dump-dom) já pegar o resultado */
+addEventListener('load', () => {
+  fotos.forEach((f, n) => {
+    const [x, y, w, h] = f.corte, k = Math.min(1, 800 / w);
+    const c = document.createElement('canvas');
+    c.width = Math.round(w * k); c.height = Math.round(h * k);
+    const g = c.getContext('2d');
+    g.imageSmoothingQuality = 'high';
+    g.filter = f.filtro;
+    g.drawImage(imgs[n], x, y, w, h, 0, 0, c.width, c.height);
+    if (exportar) {
+      const pre = document.createElement('pre');
+      pre.dataset.nome = f.nome;
+      pre.textContent = c.toDataURL('image/webp', 0.82);
+      document.body.appendChild(pre);
+    } else document.body.appendChild(c);
+    imgs[n].remove();
+  });
+});
+</script>

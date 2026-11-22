@@ -364,7 +364,38 @@ section{scroll-margin-top:62px}
   .cartao{flex-basis:72vw}
   .topo span{font-size:.9rem;letter-spacing:.2em}
 }
+/* ---------- Trabalhos realizados ---------- */
+.trabalhos{background:var(--foam);padding:72px max(24px,calc((100% - 1120px)/2)) 80px}
+.trab-topo h2{font-family:'Poppins',Arial,sans-serif;font-style:italic;font-weight:800;color:var(--navy);
+  font-size:clamp(1.5rem,2.4vw,2rem);line-height:1.1;margin-top:10px}
+.trab-topo h2 em{font-style:italic;color:var(--sun)}
+.trab-topo p{margin-top:10px;max-width:520px;font-weight:300;line-height:1.55}
+.galeria{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:34px}
+.obra{position:relative;margin:0;aspect-ratio:4/5;overflow:hidden;background:#123;box-shadow:0 10px 28px rgba(7,42,66,.16)}
+.obra img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:cover;
+  transition:transform .9s cubic-bezier(.2,.7,.2,1),opacity .7s ease}
+.obra:hover img{transform:scale(1.04)}
+.obra img.antes{opacity:0}
+.obra.mostra-antes img.antes{opacity:1}
+.obra.par{cursor:pointer}
+.troca{position:absolute;top:12px;left:12px;z-index:2;display:flex}
+.troca button{border:0;padding:5px 11px;font:600 .7rem 'Outfit',sans-serif;letter-spacing:.12em;text-transform:uppercase;
+  background:rgba(7,42,66,.72);color:#fff;cursor:pointer;transition:background .3s,color .3s}
+.troca button[aria-pressed="true"]{background:var(--sun);color:var(--navy-d)}
+.obra figcaption{position:absolute;inset:auto 0 0 0;z-index:1;padding:56px 16px 16px;color:#fff;pointer-events:none;
+  background:linear-gradient(transparent,rgba(7,42,66,.88))}
+.obra strong{display:block;font-size:1.05rem;font-weight:700}
+.obra small{font-size:.85rem;font-weight:300;color:rgba(255,255,255,.85)}
+@media (max-width:820px){
+  .trabalhos{padding:52px 24px 60px}
+  .galeria{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;gap:12px;
+    margin:26px -24px 0;padding:0 24px 6px;scroll-padding:0 24px}
+  .galeria::-webkit-scrollbar{display:none}
+  .obra{flex:0 0 76vw;scroll-snap-align:start}
+}
+
 @media (prefers-reduced-motion:reduce){
+  .obra img{transition:none}
   html{scroll-behavior:auto}
   .slide svg,.slide img{animation:none}
   .surge{opacity:1;transform:none;transition:none}
@@ -413,6 +444,7 @@ section{scroll-margin-top:62px}
   <nav class="menu" id="menu">
     <a href="#antes-depois">Antes e depois</a>
     <a href="#ph">Serviços</a>
+    <a href="#trabalhos">Trabalhos</a>
     <a href="#onde">Onde atendemos</a>
     <a href="#duvidas">Dúvidas</a>
   </nav>
@@ -483,6 +515,16 @@ section{scroll-margin-top:62px}
   </div>
 </section>
 
+<!-- ============ TRABALHOS REALIZADOS (fotos reais; a lista fica no script, em "realizados") ============ -->
+<section class="trabalhos" id="trabalhos">
+  <div class="trab-topo surge">
+    <span class="rotulo">Portfólio</span>
+    <h2>Trabalhos <em>realizados</em></h2>
+    <p>Fotos reais de piscinas que cuidamos. Nos cartões com antes e depois, toque na foto para ver como a água estava.</p>
+  </div>
+  <div class="galeria" id="galeria"></div>
+</section>
+
 <!-- ============ ONDE ATENDEMOS ============ -->
 <section class="local" id="onde">
   <div class="surge">
@@ -529,7 +571,7 @@ section{scroll-margin-top:62px}
   </details>
   <details>
     <summary>Vocês recuperam piscina verde ou parada há muito tempo?</summary>
-    <p>Sim. Veja exemplos na seção <a href="#antes-depois">Antes e depois</a>. O tempo de recuperação depende do estado da água; mande uma foto pelo <a data-zap href="#" target="_blank" rel="noopener">WhatsApp</a> para avaliarmos.</p>
+    <p>Sim. Veja exemplos reais na seção <a href="#trabalhos">Trabalhos realizados</a>. O tempo de recuperação depende do estado da água; mande uma foto pelo <a data-zap href="#" target="_blank" rel="noopener">WhatsApp</a> para avaliarmos.</p>
   </details>
   <details>
     <summary>Preciso estar em casa na hora da visita?</summary>
@@ -660,6 +702,42 @@ document.querySelector('.seta.esq').onclick=()=>irPara(-1);
 document.querySelector('.seta.dir').onclick=()=>irPara(1);
 
 /* Cabeçalho e animações de entrada */
+/* Trabalhos realizados: fotos em fotos/trabalhos/ (geradas por ferramentas/trabalhos.ps1).
+   Com "antes" e "depois" o cartão alterna entre as duas fotos; com "foto" mostra uma só. */
+const realizados = [
+  {antes:'1-verde-antes',  depois:'1-verde-depois',  titulo:'Água verde → cristalina', obs:'Piscina de fibra recuperada'},
+  {antes:'2-turva-antes',  depois:'2-turva-depois',  titulo:'Água turva → azul',       obs:'Tratamento e filtragem'},
+  {antes:'3-folhas-antes', depois:'3-folhas-depois', titulo:'Folhas removidas',        obs:'Peneiração e aspiração'},
+  {foto:'4-azulejo', titulo:'Água cristalina',     obs:'Piscina de azulejo'},
+  {foto:'5-sombra',  titulo:'Manutenção em dia',   obs:'Água limpa e equilibrada'},
+  {foto:'6-fibra',   titulo:'Pronta para o banho', obs:'Piscina de fibra'}
+];
+const galeria=document.getElementById('galeria');
+const semMovimento=matchMedia('(prefers-reduced-motion:reduce)').matches;
+const obsPar=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return; obsPar.unobserve(e.target);
+  /* Ao aparecer pela primeira vez, mostra o "antes" e volta para o "depois" */
+  const f=e.target; f.mostrar(true); setTimeout(()=>{if(!f.tocou)f.mostrar(false)},1700);
+}),{threshold:.6});
+realizados.forEach(t=>{
+  const f=document.createElement('figure');
+  const img=(nome,cls,alt)=>`<img${cls?` class="${cls}"`:''} src="fotos/trabalhos/${nome}.webp" alt="${alt}" loading="lazy" draggable="false">`;
+  const leg=`<figcaption><strong>${t.titulo}</strong><small>${t.obs}</small></figcaption>`;
+  if(!t.antes){
+    f.className='obra';
+    f.innerHTML=img(t.foto,'',`${t.titulo}: ${t.obs}`)+leg;
+  }else{
+    f.className='obra par';
+    f.innerHTML=img(t.depois,'depois',`Depois: ${t.titulo}`)+img(t.antes,'antes',`Antes: ${t.titulo}`)+
+      `<div class="troca"><button type="button" aria-pressed="false">Antes</button><button type="button" aria-pressed="true">Depois</button></div>`+leg;
+    const [bA,bD]=f.querySelectorAll('.troca button');
+    f.mostrar=antes=>{f.classList.toggle('mostra-antes',antes);bA.setAttribute('aria-pressed',antes);bD.setAttribute('aria-pressed',!antes)};
+    f.onclick=e=>{f.tocou=true;obsPar.unobserve(f);f.mostrar(e.target===bA?true:e.target===bD?false:!f.classList.contains('mostra-antes'))};
+    if(!semMovimento)obsPar.observe(f);
+  }
+  galeria.appendChild(f);
+});
+
 const topo=document.getElementById('topo');
 /* WhatsApp: coloque o número com 55 + DDD, só dígitos. Exemplo: '5547999990000' */
 const WHATSAPP = '5547999310385';
