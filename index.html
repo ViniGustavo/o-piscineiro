@@ -616,6 +616,9 @@ document.addEventListener('click',e=>{
   e.preventDefault();
   alvo.scrollIntoView();
 });
+/* Ao atualizar a página, ela volta para o início (o navegador não restaura a rolagem) */
+if('scrollRestoration' in history) history.scrollRestoration='manual';
+if(!location.hash) scrollTo(0,0);
 /* Quem abrir um link antigo com "#secao" vai para a seção e o endereço fica limpo */
 if(location.hash) addEventListener('load',()=>history.replaceState(null,'',location.pathname+location.search));
 
