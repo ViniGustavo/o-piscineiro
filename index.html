@@ -607,6 +607,18 @@ const WHATSAPP = '5547999310385';
 const zapMsg = encodeURIComponent('Olá! Vi o site de O Piscineiro e gostaria de falar sobre a minha piscina.');
 document.querySelectorAll('[data-zap]').forEach(a=>a.href='https://wa.me/'+WHATSAPP+'?text='+zapMsg);
 
+/* Links do menu: rola até a seção sem colocar "#secao" no endereço */
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a[href^="#"]');
+  if(!a||a.hasAttribute('data-zap')||e.ctrlKey||e.metaKey||e.shiftKey) return;
+  const alvo=document.getElementById(a.getAttribute('href').slice(1));
+  if(!alvo) return;
+  e.preventDefault();
+  alvo.scrollIntoView();
+});
+/* Quem abrir um link antigo com "#secao" vai para a seção e o endereço fica limpo */
+if(location.hash) addEventListener('load',()=>history.replaceState(null,'',location.pathname+location.search));
+
 /* Faixa amarela: repete o conteúdo para nunca faltar texto em telas largas */
 const faixa=document.querySelector('.faixa div');
 faixa.innerHTML+=faixa.innerHTML;
